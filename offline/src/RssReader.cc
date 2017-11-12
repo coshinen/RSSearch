@@ -125,7 +125,7 @@ void RssReader::parseRss(const std::string & fileName)
 		rssItem.link = link;
 		rssItem.content = processContent;
 		_articles.push_back(rssItem);
-	} while (itemElement = itemElement->NextSiblingElement());
+	} while ((itemElement = itemElement->NextSiblingElement()));
 }
 
 void RssReader::dumpOffset(const std::string & fileName)
