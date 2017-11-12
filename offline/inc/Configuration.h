@@ -17,6 +17,7 @@ const char * const CONF_PATH = "../conf/my.conf";
 const char * const RES_PATH = "res";
 const char * const PAGE_LIB_PATH = "pagelib";
 const char * const OFFSET_LIB_PATH = "offsetlib";
+const char * const INVERT_LIB_PATH = "invertlib";
 
 class Configuration
 {

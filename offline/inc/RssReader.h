@@ -11,6 +11,8 @@
 #include <vector>
 #include <utility>
 #include <sstream>
+#include <unordered_map>
+#include <set>
 
 namespace my
 {
@@ -40,11 +42,13 @@ private:
 	void parseRss(const std::string & fileName);
 	void dumpOffset(const std::string & fileName);
 	void deduplication();
+	void dumpInvert(const std::string & fileName);
 private:
 	std::vector<std::string> _docs;
 	std::vector<RssItem> _articles;
 	std::vector<RssItem> _newArticles;
 	std::vector<std::pair<std::size_t, std::size_t> > _offset;
+	std::unordered_map<std::string, std::set<std::pair<int, double> > > _invertIndexTable;
 };
 
 } // end of namespace my

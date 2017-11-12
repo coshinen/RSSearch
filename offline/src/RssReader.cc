@@ -54,6 +54,7 @@ void RssReader::dump(const std::string & fileName)
 		return;
 	}
 
+	simhash::Simhasher simhasher("../dict/jieba.dict.utf8", "../dict/hmm_model.utf8", "../dict/idf.utf8", "../dict/stop_words.utf8");
 	for (std::size_t idx = 0; idx != _newArticles.size(); ++idx)
 	{
 		std::size_t offset = ofs.tellp();
@@ -66,11 +67,19 @@ void RssReader::dump(const std::string & fileName)
 		std::size_t length = text.size();
 		ofs << text;
 		_offset.push_back(std::make_pair(offset, length));
+		
+		std::vector<std::pair<std::string, double> > res;
+		simhasher.extract(_newArticles[idx]._content, res, 65536);
+		for (std::size_t i = 0; i != res.size(); ++i)
+		{
+			_invertIndexTable[res[i].first].insert(std::make_pair(idx + 1, res[i].second));
+		}
 	}
 
 	ofs.close();
 
 	dumpOffset(Configuration::getInstance()->getConfigMap()[OFFSET_LIB_PATH]);
+	dumpInvert(Configuration::getInstance()->getConfigMap()[INVERT_LIB_PATH]);
 }
 
 void RssReader::parseRss(const std::string & fileName)
@@ -94,6 +103,8 @@ void RssReader::parseRss(const std::string & fileName)
 	
 	RssItem rssItem;
 
+	simhash::Simhasher simhasher("../dict/jieba.dict.utf8", "../dict/hmm_model.utf8", "../dict/idf.utf8", "../dict/stop_words.utf8");
+	
 	do
 	{
 		tinyxml2::XMLElement * titleElement = itemElement->FirstChildElement("title");
@@ -125,11 +136,10 @@ void RssReader::parseRss(const std::string & fileName)
 		boost::regex re("<.*?>");
 		std::string processContent = boost::regex_replace(content, re, "");
 
-		simhash::Simhasher simhasher("../dict/jieba.dict.utf8", "../dict/hmm_model.utf8", "../dict/idf.utf8", "../dict/stop_words.utf8");
 		size_t topN = 7;
 		uint64_t u64 = 0;
-		std::vector<std::pair<std::string, double> > res;
-		simhasher.extract(processContent, res, topN);
+		//std::vector<std::pair<std::string, double> > res;
+		//simhasher.extract(processContent, res, 65536);
 		simhasher.make(processContent, topN, u64);
 		std::cout << "simhash = " << u64 << std::endl;
 
@@ -172,6 +182,27 @@ void RssReader::deduplication()
 		if (size == i)
 			_newArticles.push_back(_articles[idx]);
 	}
+}
+
+void RssReader::dumpInvert(const std::string & fileName)
+{
+	std::ofstream ofs(fileName);
+	if (!ofs.good()) {
+		std::cout << "ofstream open file failed!" << std::endl;
+		return;
+	}
+
+	for (auto elem : _invertIndexTable)
+	{
+		ofs << elem.first << " ";
+		for (auto temp : elem.second)
+		{
+			ofs << temp.first << " " << temp.second << " ";
+		}
+		ofs << std::endl;
+	}
+
+	ofs.close();
 }
 
 } // end of namespace my
