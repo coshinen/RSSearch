@@ -24,9 +24,10 @@ inline std::string int2str(std::size_t inum)
 
 struct RssItem
 {
-	std::string title;
-	std::string link;
-	std::string content;
+	std::string _title;
+	std::string _link;
+	std::string _content;
+	uint64_t _simhash;
 };
 
 class RssReader
@@ -38,9 +39,11 @@ public:
 private:
 	void parseRss(const std::string & fileName);
 	void dumpOffset(const std::string & fileName);
+	void deduplication();
 private:
 	std::vector<std::string> _docs;
 	std::vector<RssItem> _articles;
+	std::vector<RssItem> _newArticles;
 	std::vector<std::pair<std::size_t, std::size_t> > _offset;
 };
 

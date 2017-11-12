@@ -5,8 +5,10 @@
  ///
 
 #include "RssReader.h"
-#include "tinyxml2.h"
 #include "Configuration.h"
+
+#include "tinyxml2.h"
+#include "simhash/Simhasher.hpp"
 
 #include <boost/regex.hpp>
 
@@ -40,6 +42,8 @@ void RssReader::parseRss()
 		std::cout << elem << std::endl;
 		parseRss(elem);
 	}
+	
+	deduplication();
 }
 
 void RssReader::dump(const std::string & fileName)
@@ -50,14 +54,14 @@ void RssReader::dump(const std::string & fileName)
 		return;
 	}
 
-	for (std::size_t idx = 0; idx != _articles.size(); ++idx)
+	for (std::size_t idx = 0; idx != _newArticles.size(); ++idx)
 	{
 		std::size_t offset = ofs.tellp();
 		std::string text = std::string("<doc>\n")
 			+ "<docid>" + int2str(idx + 1) + "</docid>\n"
-			+ "<url>" + _articles[idx].link + "</url>\n"
-			+ "<title>" + _articles[idx].title + "</title>\n"
-			+ "<content>" + _articles[idx].content + "</content>\n"
+			+ "<url>" + _newArticles[idx]._link + "</url>\n"
+			+ "<title>" + _newArticles[idx]._title + "</title>\n"
+			+ "<content>" + _newArticles[idx]._content + "</content>\n"
 			+ "</doc>\n";
 		std::size_t length = text.size();
 		ofs << text;
@@ -121,9 +125,18 @@ void RssReader::parseRss(const std::string & fileName)
 		boost::regex re("<.*?>");
 		std::string processContent = boost::regex_replace(content, re, "");
 
-		rssItem.title = title;
-		rssItem.link = link;
-		rssItem.content = processContent;
+		simhash::Simhasher simhasher("../dict/jieba.dict.utf8", "../dict/hmm_model.utf8", "../dict/idf.utf8", "../dict/stop_words.utf8");
+		size_t topN = 7;
+		uint64_t u64 = 0;
+		std::vector<std::pair<std::string, double> > res;
+		simhasher.extract(processContent, res, topN);
+		simhasher.make(processContent, topN, u64);
+		std::cout << "simhash = " << u64 << std::endl;
+
+		rssItem._title = title;
+		rssItem._link = link;
+		rssItem._content = processContent;
+		rssItem._simhash = u64;
 		_articles.push_back(rssItem);
 	} while ((itemElement = itemElement->NextSiblingElement()));
 }
@@ -142,6 +155,23 @@ void RssReader::dumpOffset(const std::string & fileName)
 	}
 
 	ofs.close();
+}
+
+void RssReader::deduplication()
+{
+	_newArticles.push_back(_articles[0]);
+	for (std::size_t idx = 1; idx != _articles.size(); ++idx)
+	{
+		std::size_t i;
+		std::size_t size = _newArticles.size();
+		for (i = 0; i != size; ++i)
+		{
+			if (1 == simhash::Simhasher::isEqual(_newArticles[i]._simhash, _articles[idx]._simhash))
+				break;
+		}
+		if (size == i)
+			_newArticles.push_back(_articles[idx]);
+	}
 }
 
 } // end of namespace my
