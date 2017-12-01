@@ -7,15 +7,13 @@
 #include "Configuration.h"
 #include "RssReader.h"
 
-#include <iostream>
-using std::cout;
-using std::endl;
-
 int main(void)
 {
+	/* load configuration */
 	my::Configuration::getInstance()->init(my::CONF_PATH);
 	my::Configuration::getInstance()->display();
 
+	/* parse xml */
 	my::RssReader rssReader;
 	rssReader.init(my::Configuration::getInstance()->getConfigMap()[my::RES_PATH]);
 	rssReader.parseRss();

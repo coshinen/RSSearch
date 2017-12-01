@@ -37,10 +37,10 @@ void RssReader::init(const std::string & path)
 
 void RssReader::parseRss()
 {
-	for (auto elem : _docs)
+	for (auto doc : _docs)
 	{
-		std::cout << elem << std::endl;
-		parseRss(elem);
+		std::cout << doc << std::endl;
+		parseRss(doc);
 	}
 	
 	deduplication();
@@ -54,7 +54,10 @@ void RssReader::dump(const std::string & fileName)
 		return;
 	}
 
-	simhash::Simhasher simhasher("../dict/jieba.dict.utf8", "../dict/hmm_model.utf8", "../dict/idf.utf8", "../dict/stop_words.utf8");
+	simhash::Simhasher simhasher(Configuration::getInstance()->getConfigMap()[DICT_PATH].c_str(),
+			Configuration::getInstance()->getConfigMap()[HMM_PATH].c_str(),
+			Configuration::getInstance()->getConfigMap()[IDF_PATH].c_str(),
+			Configuration::getInstance()->getConfigMap()[STOP_WORD_PATH].c_str());
 	for (std::size_t idx = 0; idx != _newArticles.size(); ++idx)
 	{
 		std::size_t offset = ofs.tellp();
@@ -103,8 +106,11 @@ void RssReader::parseRss(const std::string & fileName)
 	
 	RssItem rssItem;
 
-	simhash::Simhasher simhasher("../dict/jieba.dict.utf8", "../dict/hmm_model.utf8", "../dict/idf.utf8", "../dict/stop_words.utf8");
-	
+	simhash::Simhasher simhasher(Configuration::getInstance()->getConfigMap()[DICT_PATH].c_str(),
+			Configuration::getInstance()->getConfigMap()[HMM_PATH].c_str(),
+			Configuration::getInstance()->getConfigMap()[IDF_PATH].c_str(),
+			Configuration::getInstance()->getConfigMap()[STOP_WORD_PATH].c_str());
+
 	do
 	{
 		tinyxml2::XMLElement * titleElement = itemElement->FirstChildElement("title");
@@ -138,8 +144,6 @@ void RssReader::parseRss(const std::string & fileName)
 
 		size_t topN = 7;
 		uint64_t u64 = 0;
-		//std::vector<std::pair<std::string, double> > res;
-		//simhasher.extract(processContent, res, 65536);
 		simhasher.make(processContent, topN, u64);
 		std::cout << "simhash = " << u64 << std::endl;
 
@@ -149,6 +153,23 @@ void RssReader::parseRss(const std::string & fileName)
 		rssItem._simhash = u64;
 		_articles.push_back(rssItem);
 	} while ((itemElement = itemElement->NextSiblingElement()));
+}
+
+void RssReader::deduplication()
+{
+	_newArticles.push_back(_articles[0]);
+	for (std::size_t idx = 1; idx != _articles.size(); ++idx)
+	{
+		std::size_t pos;
+		std::size_t size = _newArticles.size();
+		for (pos = 0; pos != size; ++pos)
+		{
+			if (1 == simhash::Simhasher::isEqual(_newArticles[pos]._simhash, _articles[idx]._simhash))
+				break;
+		}
+		if (size == pos)
+			_newArticles.push_back(_articles[idx]);
+	}
 }
 
 void RssReader::dumpOffset(const std::string & fileName)
@@ -167,23 +188,6 @@ void RssReader::dumpOffset(const std::string & fileName)
 	ofs.close();
 }
 
-void RssReader::deduplication()
-{
-	_newArticles.push_back(_articles[0]);
-	for (std::size_t idx = 1; idx != _articles.size(); ++idx)
-	{
-		std::size_t i;
-		std::size_t size = _newArticles.size();
-		for (i = 0; i != size; ++i)
-		{
-			if (1 == simhash::Simhasher::isEqual(_newArticles[i]._simhash, _articles[idx]._simhash))
-				break;
-		}
-		if (size == i)
-			_newArticles.push_back(_articles[idx]);
-	}
-}
-
 void RssReader::dumpInvert(const std::string & fileName)
 {
 	std::ofstream ofs(fileName);
@@ -192,10 +196,10 @@ void RssReader::dumpInvert(const std::string & fileName)
 		return;
 	}
 
-	for (auto elem : _invertIndexTable)
+	for (auto invertIndex : _invertIndexTable)
 	{
-		ofs << elem.first << " ";
-		for (auto temp : elem.second)
+		ofs << invertIndex.first << " ";
+		for (auto temp : invertIndex.second)
 		{
 			ofs << temp.first << " " << temp.second << " ";
 		}

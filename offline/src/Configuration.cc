@@ -14,6 +14,7 @@ namespace my
 {
 
 Configuration * Configuration::_pInstance = getInstance();
+Configuration::AutoRelease Configuration::_autoRelease;
 
 Configuration * Configuration::getInstance()
 {
@@ -46,13 +47,29 @@ bool Configuration::init(const std::string & filePath)
 
 void Configuration::display()
 {
-	for (auto elem : _configMap)
+	for (auto & map : _configMap)
 	{
-		std::cout << elem.first << " --> " << elem.second << std::endl;
+		std::cout << map.first << " --> " << map.second << std::endl;
 	}
 }
 
 std::map<std::string, std::string> & Configuration::getConfigMap()
 { return _configMap; }
+
+Configuration::Configuration()
+{ std::cout << "Configuration()" << std::endl; }
+
+Configuration::~Configuration()
+{ std::cout << "~Configuration()" << std::endl; }
+
+Configuration::AutoRelease::AutoRelease()
+{ std::cout << "Configuration::AutoRelease()" << std::endl; }
+
+Configuration::AutoRelease::~AutoRelease()
+{
+	std::cout << "Configuration::~AutoRelease()" << std::endl;
+	if (_pInstance)
+		delete _pInstance;
+}
 
 } // end of namespace my

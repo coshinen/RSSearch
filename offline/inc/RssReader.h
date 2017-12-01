@@ -40,8 +40,8 @@ public:
 	void dump(const std::string & fileName);
 private:
 	void parseRss(const std::string & fileName);
-	void dumpOffset(const std::string & fileName);
 	void deduplication();
+	void dumpOffset(const std::string & fileName);
 	void dumpInvert(const std::string & fileName);
 private:
 	std::vector<std::string> _docs;
