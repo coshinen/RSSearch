@@ -1,6 +1,6 @@
 INC_DIR:= ./inc/ ./inc/simhash/
 SRC_DIR:= ./src/
-SRCS:=$(wildcard ./src/*.cc)
+SRCS:= $(wildcard ./src/*.cc)
 OBJS:= $(patsubst %.cc, %.o, $(SRCS))
 LIBS:= -lpthread
 
