@@ -2,11 +2,11 @@ INC_DIR:= ./inc/ ./inc/limonp ./inc/cppjieba ./inc/simhash/
 SRC_DIR:= ./src/
 SRCS:= $(wildcard ./src/*.cc)
 OBJS:= $(patsubst %.cc, %.o, $(SRCS))
-LIBS:= -lpthread
+LIBS:= -lboost_regex
 
 CXX:=g++
 
-CXXFLAGS:= -w -g -std=c++11 -lboost_regex $(addprefix -I, $(INC_DIR)) $(LIBS) -Wno-deprecated
+CXXFLAGS:= -w -g -std=c++11 $(addprefix -I, $(INC_DIR)) $(LIBS) -Wno-deprecated
 
 EXE:=./bin/createLibrary.exe
 
