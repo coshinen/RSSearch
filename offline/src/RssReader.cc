@@ -37,7 +37,7 @@ void RssReader::init(const std::string & path)
 
 void RssReader::parseRss()
 {
-	for (auto doc : _docs)
+	for (auto & doc : _docs)
 	{
 		std::cout << doc << std::endl;
 		parseRss(doc);
