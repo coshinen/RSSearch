@@ -17,19 +17,20 @@
 
 #include <iostream>
 #include <fstream>
+#include <utility>
 
 namespace my
 {
 
-void RssReader::init(const std::string & path)
+void RssReader::init(const char * path)
 {
-	DIR * pDir = ::opendir(path.c_str());
+	DIR * pDir = ::opendir(path);
 	struct dirent * pd;
 	char fileName[256];
 	while ((pd = ::readdir(pDir)) != NULL)
 	{
 		if (::strcmp(pd->d_name, ".") && ::strcmp(pd->d_name, "..")) {
-			::sprintf(fileName, "%s%s", path.c_str(), pd->d_name);
+			::sprintf(fileName, "%s%s", path, pd->d_name);
 			_docs.push_back(fileName);
 		}
 	}
@@ -40,13 +41,13 @@ void RssReader::parseRss()
 	for (auto & doc : _docs)
 	{
 		std::cout << doc << std::endl;
-		parseRss(doc);
+		parseRss(doc.c_str());
 	}
 	
 	deduplication();
 }
 
-void RssReader::dump(const std::string & fileName)
+void RssReader::dump(const char * fileName)
 {
 	std::ofstream ofs(fileName);
 	if (!ofs.good()) {
@@ -68,9 +69,12 @@ void RssReader::dump(const std::string & fileName)
 			+ "<content>" + _newArticles[idx]._content + "</content>\n"
 			+ "</doc>\n";
 		std::size_t length = text.size();
+		/* ripepage library */
 		ofs << text;
+		/* offset library */
 		_offset.push_back(std::make_pair(offset, length));
-		
+
+		/* invert index library */
 		std::vector<std::pair<std::string, double> > res;
 		simhasher.extract(_newArticles[idx]._content, res, 65536);
 		for (std::size_t i = 0; i != res.size(); ++i)
@@ -81,14 +85,14 @@ void RssReader::dump(const std::string & fileName)
 
 	ofs.close();
 
-	dumpOffset(Configuration::getInstance()->getConfigMap()[OFFSET_LIB_PATH]);
-	dumpInvert(Configuration::getInstance()->getConfigMap()[INVERT_LIB_PATH]);
+	dumpOffset(Configuration::getInstance()->getConfigMap()[OFFSET_LIB_PATH].c_str());
+	dumpInvert(Configuration::getInstance()->getConfigMap()[INVERT_LIB_PATH].c_str());
 }
 
-void RssReader::parseRss(const std::string & fileName)
+void RssReader::parseRss(const char * fileName)
 {
 	tinyxml2::XMLDocument doc;
-	doc.LoadFile(fileName.c_str());
+	doc.LoadFile(fileName);
 	if (doc.ErrorID()) {
 		std::cout << "tinyxml2::XMLDocument load file failed!" << std::endl;
 		return;
@@ -151,7 +155,7 @@ void RssReader::parseRss(const std::string & fileName)
 		rssItem._link = link;
 		rssItem._content = processContent;
 		rssItem._simhash = u64;
-		_articles.push_back(rssItem);
+		_articles.push_back(std::move(rssItem));
 	} while ((itemElement = itemElement->NextSiblingElement()));
 }
 
@@ -172,7 +176,7 @@ void RssReader::deduplication()
 	}
 }
 
-void RssReader::dumpOffset(const std::string & fileName)
+void RssReader::dumpOffset(const char * fileName)
 {
 	std::ofstream ofs(fileName);
 	if (!ofs.good()) {
@@ -188,7 +192,7 @@ void RssReader::dumpOffset(const std::string & fileName)
 	ofs.close();
 }
 
-void RssReader::dumpInvert(const std::string & fileName)
+void RssReader::dumpInvert(const char * fileName)
 {
 	std::ofstream ofs(fileName);
 	if (!ofs.good()) {

@@ -15,9 +15,9 @@ int main(void)
 
 	/* parse xml */
 	my::RssReader rssReader;
-	rssReader.init(my::Configuration::getInstance()->getConfigMap()[my::RES_PATH]);
+	rssReader.init(my::Configuration::getInstance()->getConfigMap()[my::RES_PATH].c_str());
 	rssReader.parseRss();
-	rssReader.dump(my::Configuration::getInstance()->getConfigMap()[my::PAGE_LIB_PATH]);
+	rssReader.dump(my::Configuration::getInstance()->getConfigMap()[my::PAGE_LIB_PATH].c_str());
 
 	return 0;
 }

@@ -35,14 +35,14 @@ struct RssItem
 class RssReader
 {
 public:
-	void init(const std::string & path);
+	void init(const char * path);
 	void parseRss();
-	void dump(const std::string & fileName);
+	void dump(const char * fileName);
 private:
-	void parseRss(const std::string & fileName);
+	void parseRss(const char * fileName);
 	void deduplication();
-	void dumpOffset(const std::string & fileName);
-	void dumpInvert(const std::string & fileName);
+	void dumpOffset(const char * fileName);
+	void dumpInvert(const char * fileName);
 private:
 	std::vector<std::string> _docs;
 	std::vector<RssItem> _articles;

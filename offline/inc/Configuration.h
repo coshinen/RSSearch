@@ -28,7 +28,7 @@ class Configuration
 public:
 	static Configuration * getInstance();
 
-	bool init(const std::string & filePath);
+	bool init(const char * filePath);
 
 	void display();
 

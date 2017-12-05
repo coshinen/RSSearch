@@ -23,9 +23,9 @@ Configuration * Configuration::getInstance()
 	return _pInstance;
 }
 
-bool Configuration::init(const std::string & filePath)
+bool Configuration::init(const char * filePath)
 {
-	std::ifstream ifs(filePath.c_str());
+	std::ifstream ifs(filePath);
 	if (!ifs.good()) {
 		std::cout << "ifstream open file failed!" << std::endl;
 		return false;
