@@ -49,7 +49,7 @@ std::string RssSearch::doQuery(const std::string & query)
 		}
 	}
 
-#if 1
+#if 0
 	for (auto & word : queryWords)
 	{
 		std::cout << word << std::endl;
@@ -268,7 +268,8 @@ bool RssSearch::executeQuery(const std::vector<std::string> & queryWords, std::v
 				break;
 		}
 
-		if (iterVec.size() - 1 == idx) { // 第一个元素均相同的情况。
+		if (iterVec.size() - 1 == idx) { // 所有查询词对应iterator的第一个元素(docId, weight)的id均相同的情况。
+			/* 把所有查询词的weight打包至weightVec，同时记录docId，放入结果集中 */
 			std::vector<double> weightVec;
 			std::size_t docId = iterVec[0].first->first;
 			for (idx = 0; idx != iterVec.size(); ++idx)
@@ -280,7 +281,8 @@ bool RssSearch::executeQuery(const std::vector<std::string> & queryWords, std::v
 					isExit = true;
 			}
 			resultVec.push_back(std::make_pair(docId, weightVec));
-		} else { // 第一个元素存在不同的情况。
+		} else { // 所有查询词对应iterator的第一个元素(docId, weight)的id存在不同的情况。
+			/* 找到docId最小的迭代器，将其位置后移一位 */
 			int minDocId = 0x7FFFFFFF;
 			int iterIdx;
 			for (idx = 0; idx != iterVec.size(); ++idx)
