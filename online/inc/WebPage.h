@@ -34,9 +34,6 @@ struct WordFreqCompare
 class WebPage
 {
 	friend std::ostream & operator<<(std::ostream & os, const WebPage & rhs);
-
-	friend bool operator==(const WebPage & lhs, const WebPage & rhs);
-	friend bool operator<(const WebPage & lhs, const WebPage & rhs);
 public:
 	WebPage();
 	WebPage(const std::string & doc);
@@ -45,7 +42,6 @@ public:
 	std::string getDocTitle();
 	std::string getDocUrl();
 	std::string summary(const std::vector<std::string> & queryWords);
-	std::map<std::string, std::size_t> getWordsMap();
 private:
 	void processDoc(const std::string & doc);
 	void statistic();

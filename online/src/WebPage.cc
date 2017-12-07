@@ -62,9 +62,6 @@ std::string WebPage::summary(const std::vector<std::string> & queryWords)
 	return summary;
 }
 
-std::map<std::string, std::size_t> WebPage::getWordsMap()
-{ return _wordsMap; }
-
 void WebPage::processDoc(const std::string & doc)
 {
 	std::cout << "process document..." << std::endl;
@@ -188,32 +185,6 @@ std::ostream & operator<<(std::ostream & os, const WebPage & rhs)
 		<< rhs._docUrl << std::endl
 		<< rhs._docContent;
 	return os;
-}
-
-bool operator==(const WebPage & lhs, const WebPage & rhs)
-{
-	std::size_t commNum = 0;
-	for (auto lIter = lhs._topWords.begin(); lIter != lhs._topWords.end(); ++lIter)
-	{
-		commNum += std::count(rhs._topWords.begin(), rhs._topWords.end(), *lIter);
-	}
-
-	std::size_t lhsNum = lhs._topWords.size();
-	std::size_t rhsNum = rhs._topWords.size();
-	std::size_t totalNum = lhsNum < rhsNum ? lhsNum : rhsNum;
-
-	if (static_cast<double>(commNum) / totalNum > 0.75)
-		return true;
-	else
-		return false;
-}
-
-bool operator<(const WebPage & lhs, const WebPage & rhs)
-{
-	if (lhs._docId < rhs._docId)
-		return true;
-	else
-		return false;
 }
 
 } // end of namespace my
