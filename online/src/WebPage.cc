@@ -14,9 +14,6 @@
 namespace my
 {
 
-WebPage::WebPage()
-{ std::cout << "WebPage()" << std::endl; }
-
 WebPage::WebPage(const std::string & doc)
 {
 	std::cout << "WebPage(const std::string &)" << std::endl;

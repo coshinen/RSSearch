@@ -35,8 +35,7 @@ class WebPage
 {
 	friend std::ostream & operator<<(std::ostream & os, const WebPage & rhs);
 public:
-	WebPage();
-	WebPage(const std::string & doc);
+	WebPage(const std::string & doc = "");
 	~WebPage();
 
 	std::string getDocTitle();
