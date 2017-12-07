@@ -1,0 +1,15 @@
+{
+	"thread_num" : 4,
+	"task_num" : 10,
+	"ip" : "192.168.40.128",
+	"port" : 8888,
+	"cache" : "/home/mistydew/cpp/rssSearchEngine/online/data/cache.dat",
+	"pagelib" : "/home/mistydew/cpp/rssSearchEngine/online/data/ripepage.lib",
+	"offsetlib" : "/home/mistydew/cpp/rssSearchEngine/online/data/offset.lib",
+	"invertlib" : "/home/mistydew/cpp/rssSearchEngine/online/data/invertindex.lib",
+	"jieba_dict" : "/home/mistydew/cpp/rssSearchEngine/online/dict/jieba.dict.utf8",
+	"hmm_model" : "/home/mistydew/cpp/rssSearchEngine/online/dict/hmm_model.utf8",
+	"user_dict" : "/home/mistydew/cpp/rssSearchEngine/online/dict/user.dict.utf8",
+	"idf" : "/home/mistydew/cpp/rssSearchEngine/online/dict/idf.utf8",
+	"stop_word" : "/home/mistydew/cpp/rssSearchEngine/online/dict/stop_words.utf8"
+}
