@@ -29,6 +29,7 @@ RssSearch::~RssSearch()
 
 std::string RssSearch::doQuery(const std::string & query)
 {
+	std::cout << "query: " << query << std::endl;
 	/* word segmentation and remove stop words */
 	std::vector<std::string> words;
 	WordSegmentation::getInstance()->cut(query, words);
@@ -200,13 +201,13 @@ void RssSearch::getQueryWordsWeightVector(const std::vector<std::string> & query
 	/* calculate weight */
 	std::size_t docSum = _pageLib.size();
 	double weightSum = 0;
-	//for (auto & word : queryWords)
-	for (auto & map : termFreq)
+	for (auto & word : queryWords)
+	//for (auto & map : termFreq)
 	{
-		//std::size_t tf = termFreq[word]; // tf: term frequency
-		//std::size_t df = _invertIndexTable[word].size(); // df: document frequency
-		std::size_t tf = map.second; // tf: term frequency
-		std::size_t df = _invertIndexTable[map.first].size(); // df: document frequency
+		std::size_t tf = termFreq[word]; // tf: term frequency
+		std::size_t df = _invertIndexTable[word].size(); // df: document frequency
+		//std::size_t tf = map.second; // tf: term frequency
+		//std::size_t df = _invertIndexTable[map.first].size(); // df: document frequency
 		double idf = std::log(static_cast<double>(docSum) / df + 0.05) / std::log(2); // idf: inverse document frequency
 		double weight = static_cast<double>(tf) * idf;
 		weightVec.push_back(weight);

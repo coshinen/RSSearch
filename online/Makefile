@@ -2,7 +2,7 @@ INC_DIR:= ./inc/ ./inc/net/ ./inc/bo_threadpool/ ./inc/timer/ ./inc/cache/
 SRC_DIR:= ./src/ ./src/net/ ./src/bo_threadpool/ ./src/timer/ ./src/cache/
 SRCS:= $(wildcard ./src/*.cc) $(wildcard ./src/net/*.cc) $(wildcard ./src/bo_threadpool/*.cc) $(wildcard ./src/timer/*.cc) $(wildcard ./src/cache/*.cc)
 OBJS:= $(patsubst %.cc, %.o, $(SRCS))
-LIBS:= -lpthread -lboost_regex -ljson
+LIBS:= -lpthread -ljson
 
 CXX:=g++
 

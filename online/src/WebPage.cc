@@ -8,8 +8,6 @@
 #include "Configuration.h"
 #include "WordSegmentation.h"
 
-#include <boost/regex.hpp>
-
 #include <queue>
 #include <sstream>
 
@@ -65,18 +63,6 @@ std::string WebPage::summary(const std::vector<std::string> & queryWords)
 void WebPage::processDoc(const std::string & doc)
 {
 	std::cout << "process document..." << std::endl;
-#if 0
-	boost::regex re("<.*?>");
-	std::string processDoc = boost::regex_replace(doc, re, "");
-	std::istringstream iss(processDoc);
-	std::string docId;
-	getline(iss, docId);
-	getline(iss, docId);
-	_docId = str2uint(docId);
-	getline(iss, _docUrl);
-	getline(iss, _docTitle);
-	getline(iss, _docContent);
-#endif
 	std::string begId = "<docid>";
 	std::string endId = "</docid>";
 	std::string begUrl = "<url>";
