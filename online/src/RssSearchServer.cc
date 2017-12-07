@@ -7,6 +7,7 @@
 #include "RssSearchServer.h"
 #include "Configuration.h"
 #include "./net/SocketUtil.h"
+#include "./cache/LRUCache.h"
 #include "./cache/CacheManager.h"
 #include "./timer/TimerThread.h"
 
@@ -83,7 +84,14 @@ void RssSearchServer::onClose(const TcpConnectionPtr & conn)
 
 void RssSearchServer::doTask(const TcpConnectionPtr & conn, const std::string & msg)
 {
-	conn->sendInLoop(_rssSearch.doQuery(msg));
+	LRUCache & lruCache = CacheManager::getCache(::pthread_self());
+	if (1 == lruCache.count(msg)) { // cache hit
+		std::cout << "The result is in the current cache" << std::endl;
+		conn->sendInLoop(lruCache.getLRUCache(msg));
+	} else { // cache miss
+		std::cout << "The result is not in the current cache" << std::endl;
+		conn->sendInLoop(_rssSearch.doQuery(msg));
+	}
 }
 
 } // end of namespace my

@@ -7,6 +7,8 @@
 #include "RssSearch.h"
 #include "Configuration.h"
 #include "WordSegmentation.h"
+#include "./cache/LRUCache.h"
+#include "./cache/CacheManager.h"
 
 #include "json/json.h"
 
@@ -67,6 +69,7 @@ std::string RssSearch::doQuery(const std::string & query)
 	SimilarityCompare similarityCompare(weightVec);
 
 	/* execute query */
+	LRUCache & lruCache = CacheManager::getCache(::pthread_self());
 	std::vector<std::pair<std::size_t, std::vector<double> > > resultVec;
 	if (executeQuery(queryWords, resultVec)) {
 		std::stable_sort(resultVec.begin(), resultVec.end(), similarityCompare);
@@ -75,9 +78,15 @@ std::string RssSearch::doQuery(const std::string & query)
 		{
 			docIdVec.push_back(result.first);
 		}
-		return makeJson(docIdVec, queryWords); 
+		std::string result = makeJson(docIdVec, queryWords);
+		lruCache.setLRUCache(query, result);
+		return result; 
+		//return makeJson(docIdVec, queryWords); 
 	} else {
-		return noAnswer();
+		std::string result = noAnswer(); 
+		lruCache.setLRUCache(query, result);
+		return result;
+		//return noAnswer();
 	}
 }
 
