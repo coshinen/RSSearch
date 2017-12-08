@@ -9,6 +9,7 @@
 
 #include <string>
 #include <map>
+#include <sstream>
 
 namespace my
 {
@@ -22,6 +23,13 @@ const char * const STOP_WORD_PATH = "stop_word";
 const char * const PAGE_LIB_PATH = "pagelib";
 const char * const OFFSET_LIB_PATH = "offsetlib";
 const char * const INVERT_LIB_PATH = "invertlib";
+
+inline std::string int2str(std::size_t inum)
+{
+	std::ostringstream oss;
+	oss << inum;
+	return oss.str();
+}
 
 class Configuration
 {

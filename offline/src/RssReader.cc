@@ -8,7 +8,7 @@
 #include "Configuration.h"
 
 #include "tinyxml2.h"
-#include "simhash/Simhasher.hpp"
+#include "../deps/simhash/Simhasher.hpp"
 
 #include <boost/regex.hpp>
 

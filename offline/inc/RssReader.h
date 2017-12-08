@@ -10,19 +10,11 @@
 #include <string>
 #include <vector>
 #include <utility>
-#include <sstream>
 #include <unordered_map>
 #include <set>
 
 namespace my
 {
-
-inline std::string int2str(std::size_t inum)
-{
-	std::ostringstream oss;
-	oss << inum;
-	return oss.str();
-}
 
 struct RssItem
 {
