@@ -13,7 +13,7 @@
 namespace my
 {
 
-const char * const CONF_PATH = "/home/mistydew/cpp/rssSearchEngine/offline/conf/my.conf";
+const char * const CONF_PATH = "../conf/my.conf";
 const char * const RES_PATH = "res";
 const char * const DICT_PATH = "jieba_dict";
 const char * const HMM_PATH = "hmm_model";
