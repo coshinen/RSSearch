@@ -10,7 +10,7 @@
 #include "./cache/LRUCache.h"
 #include "./cache/CacheManager.h"
 
-#include "json/json.h"
+#include "../deps/json/json.h"
 
 #include <iostream>
 #include <fstream>
