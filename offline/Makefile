@@ -1,4 +1,4 @@
-INC_DIR:= ./inc/ ./deps/cppjieba ./deps/simhash/
+INC_DIR:= ./inc/ ./deps/ ./deps/boost/ ./deps/limonp/ ./deps/cppjieba/ ./deps/simhash/
 SRC_DIR:= ./src/
 SRCS:= $(wildcard ./src/*.cc)
 OBJS:= $(patsubst %.cc, %.o, $(SRCS))
