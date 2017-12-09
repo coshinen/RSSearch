@@ -11,6 +11,7 @@
 #include "./cache/CacheManager.h"
 
 #include "../deps/json/json.h"
+#include "../deps/cpp_redis/cpp_redis"
 
 #include <iostream>
 #include <fstream>
@@ -69,8 +70,9 @@ std::string RssSearch::doQuery(const std::string & query)
 	SimilarityCompare similarityCompare(weightVec);
 
 	/* execute query */
-	LRUCache & lruCache = CacheManager::getCache(::pthread_self());
+	//LRUCache & lruCache = CacheManager::getCache(::pthread_self());
 	std::vector<std::pair<std::size_t, std::vector<double> > > resultVec;
+	std::string result;
 	if (executeQuery(queryWords, resultVec)) {
 		std::stable_sort(resultVec.begin(), resultVec.end(), similarityCompare);
 		std::vector<std::size_t> docIdVec;
@@ -78,16 +80,31 @@ std::string RssSearch::doQuery(const std::string & query)
 		{
 			docIdVec.push_back(result.first);
 		}
-		std::string result = makeJson(docIdVec, queryWords);
-		lruCache.setLRUCache(query, result);
-		return result; 
+		result = makeJson(docIdVec, queryWords);
+		//lruCache.setLRUCache(query, result);
+		//return result; 
 		//return makeJson(docIdVec, queryWords); 
 	} else {
-		std::string result = noAnswer(); 
-		lruCache.setLRUCache(query, result);
-		return result;
+		result = noAnswer(); 
+		//lruCache.setLRUCache(query, result);
+		//return result;
 		//return noAnswer();
 	}
+
+	cpp_redis::client client;
+	client.connect("192.168.40.128", 6379, [](const std::string& host, std::size_t port, cpp_redis::client::connect_state status) {
+		if (status == cpp_redis::client::connect_state::dropped) {
+			std::cout << "client disconnected from " << host << ":" << port << std::endl;
+		}
+	});
+
+	client.set(query, result, [](cpp_redis::reply& reply) {
+		std::cout << "set cache: " << reply << std::endl;
+	});
+
+	// synchronous commit, no timeout
+	client.sync_commit();
+	return result;
 }
 
 void RssSearch::showPageLib() const

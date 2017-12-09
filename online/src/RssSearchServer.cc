@@ -11,6 +11,8 @@
 #include "./cache/CacheManager.h"
 #include "./timer/TimerThread.h"
 
+#include "../deps/cpp_redis/cpp_redis"
+
 #include <iostream>
 #include <functional>
 
@@ -84,12 +86,32 @@ void RssSearchServer::onClose(const TcpConnectionPtr & conn)
 
 void RssSearchServer::doTask(const TcpConnectionPtr & conn, const std::string & msg)
 {
-	LRUCache & lruCache = CacheManager::getCache(::pthread_self());
-	if (1 == lruCache.count(msg)) { // cache hit
-		std::cout << "The result is in the current cache" << std::endl;
-		conn->sendInLoop(lruCache.getLRUCache(msg));
+	//LRUCache & lruCache = CacheManager::getCache(::pthread_self());
+	//if (1 == lruCache.count(msg)) { // cache hit
+	//	std::cout << "The result is in the current cache" << std::endl;
+	//	conn->sendInLoop(lruCache.getLRUCache(msg));
+	//} else { // cache miss
+	//	std::cout << "The result is not in the current cache" << std::endl;
+	//	conn->sendInLoop(_rssSearch.doQuery(msg));
+	//}
+	cpp_redis::client client;
+	client.connect("192.168.40.128", 6379, [](const std::string& host, std::size_t port, cpp_redis::client::connect_state status) {
+		if (status == cpp_redis::client::connect_state::dropped) {
+			std::cout << "client disconnected from " << host << ":" << port << std::endl;
+		}
+	});
+
+	std::future<cpp_redis::reply> get = client.get(msg);
+
+	// synchronous commit, no timeout
+	client.sync_commit();
+
+	cpp_redis::reply reply = get.get();
+	if (!reply.is_null()) { // cache hit
+		std::cout << "-------> cache hit 22333" << std::endl;
+		conn->sendInLoop(reply.as_string());
 	} else { // cache miss
-		std::cout << "The result is not in the current cache" << std::endl;
+		std::cout << "-------- cache miss -_-!" << std::endl;
 		conn->sendInLoop(_rssSearch.doQuery(msg));
 	}
 }
