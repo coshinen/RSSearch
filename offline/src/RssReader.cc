@@ -8,8 +8,8 @@
 #include "Configuration.h"
 
 #include "tinyxml2.h"
-#include "../deps/boost/regex.hpp"
-#include "../deps/simhash/Simhasher.hpp"
+#include "boost/regex.hpp"
+#include "simhash/Simhasher.hpp"
 
 #include <sys/types.h>
 #include <dirent.h>
