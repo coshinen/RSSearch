@@ -7,8 +7,8 @@
 #ifndef __RSSSEARCHSERVER_H__
 #define __RSSSEARCHSERVER_H__
 
-#include "./net/TcpServer.h"
-#include "./bo_threadpool/Threadpool.h"
+#include "net/TcpServer.h"
+#include "bo_threadpool/Threadpool.h"
 #include "RssSearch.h"
 
 namespace my

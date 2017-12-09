@@ -6,12 +6,12 @@
 
 #include "RssSearchServer.h"
 #include "Configuration.h"
-#include "./net/SocketUtil.h"
-#include "./cache/LRUCache.h"
-#include "./cache/CacheManager.h"
-#include "./timer/TimerThread.h"
+#include "net/SocketUtil.h"
+#include "cache/LRUCache.h"
+#include "cache/CacheManager.h"
+#include "timer/TimerThread.h"
 
-#include "../deps/cpp_redis/cpp_redis"
+#include "cpp_redis/cpp_redis"
 
 #include <iostream>
 #include <functional>

@@ -6,7 +6,7 @@
 
 #include "Configuration.h"
 
-#include "../deps/json/json.h"
+#include "json/json.h"
 
 #include <iostream>
 #include <fstream>

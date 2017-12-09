@@ -7,11 +7,11 @@
 #include "RssSearch.h"
 #include "Configuration.h"
 #include "WordSegmentation.h"
-#include "./cache/LRUCache.h"
-#include "./cache/CacheManager.h"
+#include "cache/LRUCache.h"
+#include "cache/CacheManager.h"
 
-#include "../deps/json/json.h"
-#include "../deps/cpp_redis/cpp_redis"
+#include "json/json.h"
+#include "cpp_redis/cpp_redis"
 
 #include <iostream>
 #include <fstream>

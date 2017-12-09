@@ -7,7 +7,7 @@
 #ifndef __WORDSEGMENTATION_H__
 #define __WORDSEGMENTATION_H__
 
-#include "../deps/cppjieba/Jieba.hpp"
+#include "cppjieba/Jieba.hpp"
 
 #include <string>
 #include <vector>
