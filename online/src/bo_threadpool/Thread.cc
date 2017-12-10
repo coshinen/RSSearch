@@ -13,10 +13,32 @@
 namespace my
 {
 
-Thread::Thread(ThreadCallback && cb)
+namespace curthread
+{
+
+__thread const char * threadName = "my";
+
+} // end of namespace curthread
+
+ThreadData::ThreadData(ThreadCallback && cb, const std::string & name)
+: _cb(std::move(cb))
+, _name(name)
+{}
+
+void ThreadData::runInThread()
+{
+	curthread::threadName = _name.empty() ? "my" : _name.c_str();
+	::printf("I am thread: %s\n", curthread::threadName);
+
+	if (_cb)
+		_cb();
+}
+
+Thread::Thread(ThreadCallback && cb, const std::string & name)
 : _pthId(0)
 , _isRunning(false)
 , _cb(std::move(cb))
+, _name(name)
 {}
 
 Thread::~Thread()
@@ -34,7 +56,8 @@ Thread::~Thread()
 
 void Thread::start()
 {
-	::pthread_create(&_pthId, NULL, threadFunc, this);
+	ThreadData * pThreadData = new ThreadData(std::move(_cb), _name);
+	::pthread_create(&_pthId, NULL, threadFunc, pThreadData);
 	_isRunning = true;
 }
 
@@ -54,9 +77,9 @@ bool Thread::isRunning() const
 
 void * Thread::threadFunc(void * arg)
 {
-	Thread * pThread = static_cast<Thread*>(arg);
-	if (pThread)
-		pThread->_cb();
+	ThreadData * pThreadData = static_cast<ThreadData*>(arg);
+	if (pThreadData)
+		pThreadData->runInThread();
 	return NULL;
 }
 

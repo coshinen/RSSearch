@@ -30,8 +30,6 @@ public:
 	void stop();
 
 	void addTask(TaskCallback && cb);
-	
-	std::vector<::pthread_t> & getPthIds();
 private:
 	TaskCallback getTask();
 	void threadFunc();
@@ -41,7 +39,6 @@ private:
 	TaskQueue _taskQue;
 	std::vector<std::shared_ptr<Thread> > _threads;
 	bool _isExit;
-	std::vector<::pthread_t> _pthIds;
 };
 
 } // end of namespace my

@@ -5,6 +5,7 @@
  ///
 
 #include "./bo_threadpool/Threadpool.h"
+#include "Configuration.h"
 
 #include <unistd.h>
 
@@ -30,13 +31,12 @@ void Threadpool::start()
 {
 	for (std::size_t idx = 0; idx != _threadNums; ++idx)
 	{
-		_threads.push_back(std::shared_ptr<Thread>(new Thread(std::bind(&Threadpool::threadFunc, this))));
+		_threads.push_back(std::shared_ptr<Thread>(new Thread(std::bind(&Threadpool::threadFunc, this), uint2str(idx))));
 	}
 
 	for (auto & thread : _threads)
 	{
 		thread->start();
-		_pthIds.push_back(thread->getPthId());
 	}
 }
 
@@ -61,9 +61,6 @@ void Threadpool::stop()
 
 void Threadpool::addTask(TaskCallback && cb)
 { _taskQue.push(std::move(cb)); }
-
-std::vector<::pthread_t> & Threadpool::getPthIds()
-{ return _pthIds; }
 
 Threadpool::TaskCallback Threadpool::getTask()
 { return _taskQue.pop(); }

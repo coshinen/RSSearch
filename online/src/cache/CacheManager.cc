@@ -17,36 +17,39 @@
 namespace my
 {
 
-std::map<::pthread_t, LRUCache> CacheManager::_cacheMap;
+std::vector<LRUCache> CacheManager::_cacheMap;
 
-void CacheManager::initCache(std::vector<pthread_t> & pthIds, const char * fileName)
+void CacheManager::initCache(const std::size_t & cacheNum, const char * fileName)
 {
 	LRUCache lruCache;
 	lruCache.initFromFile(fileName);
 	//这里需要获取每个计算线程的ID初始化每个线程ID对应的cache。
-	for (std::size_t idx = 0; idx != pthIds.size(); ++idx)
+	std::cout << "---------------------->" << std::endl;
+	_cacheMap.reserve(cacheNum);
+	for (std::size_t idx = 0; idx != cacheNum; ++idx)
 	{
-		_cacheMap[pthIds[idx]] = lruCache;
+		std::cout << "init --------> cache " << idx << std::endl;
+		_cacheMap.push_back(lruCache);
 	}
 	std::cout << "initCache completed" << std::endl;
 }
 
-LRUCache & CacheManager::getCache(pthread_t pthId)
-{ return _cacheMap[pthId]; }
+LRUCache & CacheManager::getCache(const std::size_t & idx)
+{ return _cacheMap[idx]; }
 
 void CacheManager::periodicUpdateCaches()
 {
-	std::map<pthread_t, LRUCache>::iterator cit = _cacheMap.begin();
-	LRUCache & temp = (*cit).second;
-	for (++cit; cit != _cacheMap.end(); ++cit)
+	std::vector<LRUCache>::iterator it = _cacheMap.begin();
+	LRUCache & temp = *it;
+	for (++it; it != _cacheMap.end(); ++it)
 	{
-		temp.update((*cit).second);
+		temp.update(*it);
 	}
 
-	cit = _cacheMap.begin();
-	for (++cit; cit != _cacheMap.end(); ++cit)
+	it = _cacheMap.begin();
+	for (++it; it != _cacheMap.end(); ++it)
 	{
-		(*cit).second.update(temp);
+		(*it).update(temp);
 	}
 
 	temp.dumpToFile(Configuration::getInstance()->getConfigMap()["cache"].c_str());

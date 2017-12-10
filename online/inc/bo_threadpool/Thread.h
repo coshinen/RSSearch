@@ -16,12 +16,30 @@
 namespace my
 {
 
+namespace curthread
+{
+
+extern __thread const char * threadName;
+
+} // end of namespace curthread
+
+struct ThreadData
+{
+	typedef std::function<void()> ThreadCallback;
+
+	ThreadData(ThreadCallback && cb, const std::string & name);
+	void runInThread();
+
+	ThreadCallback _cb;
+	std::string _name;
+};
+
 class Thread
 : Noncopyable
 {
 	typedef std::function<void()> ThreadCallback;
 public:
-	Thread(ThreadCallback && cb);
+	Thread(ThreadCallback && cb, const std::string & name = "");
 	~Thread();
 
 	void start();
@@ -36,6 +54,7 @@ private:
 	bool _isRunning;
 
 	ThreadCallback _cb;
+	std::string _name;
 };
 
 } // end of namespace my

@@ -9,6 +9,7 @@
 #include "WordSegmentation.h"
 #include "cache/LRUCache.h"
 #include "cache/CacheManager.h"
+#include "bo_threadpool/Thread.h"
 
 #include "json/json.h"
 #include "cpp_redis/cpp_redis"
@@ -70,7 +71,7 @@ std::string RssSearch::doQuery(const std::string & query)
 	SimilarityCompare similarityCompare(weightVec);
 
 	/* execute query */
-	//LRUCache & lruCache = CacheManager::getCache(::pthread_self());
+	//LRUCache & lruCache = CacheManager::getCache(str2uint(curthread::threadName));
 	std::vector<std::pair<std::size_t, std::vector<double> > > resultVec;
 	std::string result;
 	if (executeQuery(queryWords, resultVec)) {

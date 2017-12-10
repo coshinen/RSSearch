@@ -10,6 +10,7 @@
 #include "cache/LRUCache.h"
 #include "cache/CacheManager.h"
 #include "timer/TimerThread.h"
+#include "bo_threadpool/Thread.h"
 
 #include "cpp_redis/cpp_redis"
 
@@ -40,10 +41,11 @@ RssSearchServer::~RssSearchServer()
 
 void RssSearchServer::start()
 {
+	/* initialize cache */
+	CacheManager::initCache(str2uint(Configuration::getInstance()->getConfigMap()[THREAD_NUM]), Configuration::getInstance()->getConfigMap()[CACHE_PATH].c_str());
+	
 	_threadpool.start();
 
-	CacheManager::initCache(_threadpool.getPthIds(), Configuration::getInstance()->getConfigMap()[CACHE_PATH].c_str());
-	
 	/* start the timer */
 	my::TimerThread timerThread(&my::CacheManager::periodicUpdateCaches, 2, 66);
 	timerThread.start();
@@ -86,7 +88,7 @@ void RssSearchServer::onClose(const TcpConnectionPtr & conn)
 
 void RssSearchServer::doTask(const TcpConnectionPtr & conn, const std::string & msg)
 {
-	//LRUCache & lruCache = CacheManager::getCache(::pthread_self());
+	//LRUCache & lruCache = CacheManager::getCache(str2uint(curthread::threadName));
 	//if (1 == lruCache.count(msg)) { // cache hit
 	//	std::cout << "The result is in the current cache" << std::endl;
 	//	conn->sendInLoop(lruCache.getLRUCache(msg));

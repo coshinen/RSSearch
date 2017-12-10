@@ -21,6 +21,14 @@ LRUCache::LRUCache(const std::size_t & capacity)
 { std::cout << "LRUCache()" << std::endl; }
 
 /* duplicate a LRU cache */
+LRUCache::LRUCache(const LRUCache & rhs)
+: _capacity(rhs._capacity)
+{
+	update(rhs);
+	std::cout << "LRUCache(const LRUCache &)" << std::endl;
+}
+
+/* duplicate a LRU cache */
 LRUCache & LRUCache::operator=(const LRUCache & rhs)
 {
 	std::cout << "operator=(const LRUCache &)" << std::endl;
@@ -28,7 +36,7 @@ LRUCache & LRUCache::operator=(const LRUCache & rhs)
 		_capacity = rhs._capacity;
 		update(rhs);
 		//_hashMap = rhs._hashMap; // error，这里迭代器不能复制，因为复制后还是原迭代器，指向原list。
-		//_ha_lruList = rhs._lruList;
+		//_lruList = rhs._lruList;
 	}
 	return *this;
 }

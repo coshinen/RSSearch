@@ -35,6 +35,7 @@ class LRUCache
 {
 public:
 	LRUCache(const std::size_t & capacity = 65536);
+	LRUCache(const LRUCache & rhs);
 	LRUCache & operator=(const LRUCache & rhs);
 	~LRUCache();
 
