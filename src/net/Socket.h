@@ -9,7 +9,7 @@
 
 #include "Noncopyable.h"
 
-namespace my
+namespace md
 {
 
 class InetAddress;
@@ -33,6 +33,6 @@ private:
     int _sockfd;
 };
 
-} // end of namespace my
+} // end of namespace md
 
 #endif

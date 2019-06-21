@@ -8,7 +8,7 @@
 #include "./net/SocketUtil.h"
 #include "./net/InetAddress.h"
 
-namespace my
+namespace md
 {
 
 TcpServer::TcpServer(const std::string & ip, unsigned short port)
@@ -39,4 +39,4 @@ void TcpServer::setMessageCallback(TcpServerCallback cb)
 void TcpServer::setCloseCallback(TcpServerCallback cb)
 { _closeCb = cb; }
 
-} // end of namespace my
+} // end of namespace md

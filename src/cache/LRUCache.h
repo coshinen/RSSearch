@@ -11,7 +11,7 @@
 #include <unordered_map>
 #include <list>
 
-namespace my
+namespace md
 {
 
 /* LRU cache unit */
@@ -56,6 +56,6 @@ private:
     std::list<CacheEntry> _lruList;
 };
 
-} // end of namespace my
+} // end of namespace md
 
 #endif

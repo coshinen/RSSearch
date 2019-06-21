@@ -12,7 +12,7 @@
 #include <string>
 #include <vector>
 
-namespace my
+namespace md
 {
 
 class WordSegmentation
@@ -38,6 +38,6 @@ private:
     cppjieba::Jieba _jieba;
 };
 
-} // end of namespace my
+} // end of namespace md
 
 #endif

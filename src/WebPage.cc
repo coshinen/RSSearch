@@ -11,7 +11,7 @@
 #include <queue>
 #include <sstream>
 
-namespace my
+namespace md
 {
 
 WebPage::WebPage(const std::string & doc)
@@ -170,4 +170,4 @@ std::ostream & operator<<(std::ostream & os, const WebPage & rhs)
     return os;
 }
 
-} // end of namespace my
+} // end of namespace md

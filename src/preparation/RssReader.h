@@ -13,7 +13,7 @@
 #include <unordered_map>
 #include <set>
 
-namespace my
+namespace md
 {
 
 struct RssItem
@@ -43,6 +43,6 @@ private:
     std::unordered_map<std::string, std::set<std::pair<int, double> > > _invertIndexTable;
 };
 
-} // end of namespace my
+} // end of namespace md
 
 #endif

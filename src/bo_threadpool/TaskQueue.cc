@@ -6,7 +6,7 @@
 
 #include "./bo_threadpool/TaskQueue.h"
 
-namespace my
+namespace md
 {
 
 TaskQueue::TaskQueue(const std::size_t & size)
@@ -58,4 +58,4 @@ void TaskQueue::wakeUp()
     _notEmpty.notifyAll();
 }
 
-} // end of namespace my
+} // end of namespace md

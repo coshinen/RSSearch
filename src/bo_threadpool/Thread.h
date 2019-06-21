@@ -13,7 +13,7 @@
 
 #include <functional>
 
-namespace my
+namespace md
 {
 
 namespace curthread
@@ -57,6 +57,6 @@ private:
     std::string _name;
 };
 
-} // end of namespace my
+} // end of namespace md
 
 #endif

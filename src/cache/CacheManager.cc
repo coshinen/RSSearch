@@ -14,7 +14,7 @@
 #include <iostream>
 #include <functional>
 
-namespace my
+namespace md
 {
 
 std::vector<LRUCache> CacheManager::_cacheMap;
@@ -56,4 +56,4 @@ void CacheManager::periodicUpdateCaches()
     std::cout << "periodicUpdateCaches and writeToFile is completed" << std::endl;
 }
 
-} // end of namespace my
+} // end of namespace md

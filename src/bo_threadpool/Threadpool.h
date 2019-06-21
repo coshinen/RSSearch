@@ -16,7 +16,7 @@
 #include <memory>
 #include <functional>
 
-namespace my
+namespace md
 {
 
 class Threadpool
@@ -41,6 +41,6 @@ private:
     bool _isExit;
 };
 
-} // end of namespace my
+} // end of namespace md
 
 #endif

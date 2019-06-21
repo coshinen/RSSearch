@@ -12,7 +12,7 @@
 
 #include <string>
 
-namespace my
+namespace md
 {
 
 class TcpServer
@@ -37,6 +37,6 @@ private:
     TcpServerCallback _closeCb;
 };
 
-} // end of namespace my
+} // end of namespace md
 
 #endif

@@ -7,7 +7,7 @@
 #ifndef __NONCOPYABLE_H__
 #define __NONCOPYABLE_H__
 
-namespace my
+namespace md
 {
 
 class Noncopyable
@@ -20,6 +20,6 @@ private:
     Noncopyable & operator=(const Noncopyable &);
 };
 
-} // end of namespace my
+} // end of namespace md
 
 #endif

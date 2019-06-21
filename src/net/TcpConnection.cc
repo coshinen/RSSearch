@@ -10,7 +10,7 @@
 #include <stdio.h>
 #include <string.h>
 
-namespace my
+namespace md
 {
 
 TcpConnection::TcpConnection(int sockfd, EpollPoller * poller)
@@ -100,4 +100,4 @@ void TcpConnection::handleCloseCallback()
         _onCloseCb(shared_from_this());
 }
 
-} // end of namespace my
+} // end of namespace md

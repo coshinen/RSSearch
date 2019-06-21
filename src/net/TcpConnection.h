@@ -15,7 +15,7 @@
 #include <memory>
 #include <functional>
 
-namespace my
+namespace md
 {
 
 class EpollPoller;
@@ -59,6 +59,6 @@ private:
     TcpConnectionCallback _onCloseCb;
 };
 
-} // end of namespace my
+} // end of namespace md
 
 #endif

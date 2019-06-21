@@ -10,7 +10,7 @@
 #include <netinet/in.h>
 #include <string>
 
-namespace my
+namespace md
 {
 
 class InetAddress
@@ -27,6 +27,6 @@ private:
     struct sockaddr_in _addr;
 };
 
-} // end of namespace my
+} // end of namespace md
 
 #endif

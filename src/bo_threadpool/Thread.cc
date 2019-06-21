@@ -10,13 +10,13 @@
 
 #include <utility>
 
-namespace my
+namespace md
 {
 
 namespace curthread
 {
 
-__thread const char * threadName = "my";
+__thread const char * threadName = "md";
 
 } // end of namespace curthread
 
@@ -27,7 +27,7 @@ ThreadData::ThreadData(ThreadCallback && cb, const std::string & name)
 
 void ThreadData::runInThread()
 {
-    curthread::threadName = _name.empty() ? "my" : _name.c_str();
+    curthread::threadName = _name.empty() ? "md" : _name.c_str();
     ::printf("I am thread: %s\n", curthread::threadName);
 
     if (_cb)
@@ -83,4 +83,4 @@ void * Thread::threadFunc(void * arg)
     return NULL;
 }
 
-} // end of namespace my
+} // end of namespace md

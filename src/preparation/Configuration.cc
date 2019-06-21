@@ -10,7 +10,7 @@
 #include <fstream>
 #include <sstream>
 
-namespace my
+namespace md
 {
 
 Configuration * Configuration::_pInstance = getInstance();
@@ -72,4 +72,4 @@ Configuration::AutoRelease::~AutoRelease()
         delete _pInstance;
 }
 
-} // end of namespace my
+} // end of namespace md

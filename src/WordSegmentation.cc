@@ -7,7 +7,7 @@
 #include "WordSegmentation.h"
 #include "Configuration.h"
 
-namespace my
+namespace md
 {
 
 WordSegmentation * WordSegmentation::_pInstance = NULL;
@@ -44,4 +44,4 @@ WordSegmentation::AutoRelease::~AutoRelease()
         delete _pInstance;
 }
 
-} // end of namespace my
+} // end of namespace md

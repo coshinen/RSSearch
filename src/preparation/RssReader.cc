@@ -18,7 +18,7 @@
 #include <fstream>
 #include <utility>
 
-namespace my
+namespace md
 {
 
 void RssReader::init(const char * path)
@@ -212,4 +212,4 @@ void RssReader::dumpInvert(const char * fileName)
     ofs.close();
 }
 
-} // end of namespace my
+} // end of namespace md

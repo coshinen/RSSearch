@@ -9,7 +9,7 @@
 
 #include <functional>
 
-namespace my
+namespace md
 {
 
 class Timer
@@ -33,6 +33,6 @@ private:
     bool _isStarted;
 };
 
-} // end of namespace my
+} // end of namespace md
 
 #endif

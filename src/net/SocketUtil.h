@@ -20,7 +20,7 @@
 #include <string>
 #include <sstream>
 
-namespace my
+namespace md
 {
 
 inline int createSocketFd()
@@ -121,6 +121,6 @@ inline unsigned short str2unshort(const std::string & str)
     return number;
 }
 
-} // end of namespace my
+} // end of namespace md
 
 #endif

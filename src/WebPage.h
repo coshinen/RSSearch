@@ -14,7 +14,7 @@
 #include <map>
 #include <set>
 
-namespace my
+namespace md
 {
 
 struct WordFreqCompare
@@ -57,6 +57,6 @@ private:
     std::map<std::string, std::size_t> _wordsMap;
 };
 
-} // end of namespace my
+} // end of namespace md
 
 #endif

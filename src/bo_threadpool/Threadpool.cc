@@ -9,7 +9,7 @@
 
 #include <unistd.h>
 
-namespace my
+namespace md
 {
 
 Threadpool::Threadpool(const std::size_t & threadNums, const std::size_t & queSize)
@@ -75,4 +75,4 @@ void Threadpool::threadFunc()
     }
 }
 
-} // end of namespace my
+} // end of namespace md

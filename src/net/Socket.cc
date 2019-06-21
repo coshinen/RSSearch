@@ -8,7 +8,7 @@
 #include "SocketUtil.h"
 #include "InetAddress.h"
 
-namespace my
+namespace md
 {
 
 Socket::Socket()
@@ -56,4 +56,4 @@ InetAddress Socket::getPeerAddr(int sockfd)
     return InetAddress(addr);
 }
 
-} // end of namespace my
+} // end of namespace md

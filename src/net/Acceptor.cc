@@ -7,7 +7,7 @@
 #include "Acceptor.h"
 #include "SocketUtil.h"
 
-namespace my
+namespace md
 {
 
 Acceptor::Acceptor(int listenfd, const InetAddress & addr)
@@ -85,4 +85,4 @@ void Acceptor::listen()
     }
 }
 
-} // end of namespace my
+} // end of namespace md

@@ -15,7 +15,7 @@
 #include <set>
 #include <vector>
 
-namespace my
+namespace md
 {
 
 struct SimilarityCompare
@@ -73,6 +73,6 @@ private:
     std::unordered_map<std::string, std::set<std::pair<std::size_t, double> > > _invertIndexTable;
 };
 
-} // end of namespace my
+} // end of namespace md
 
 #endif

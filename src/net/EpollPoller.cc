@@ -10,7 +10,7 @@
 
 #include <assert.h>
 
-namespace my
+namespace md
 {
 
 EpollPoller::EpollPoller(Acceptor & acceptor)
@@ -183,4 +183,4 @@ void EpollPoller::handleMessage(int peerfd)
     }
 }
 
-} // end of namespace my
+} // end of namespace md

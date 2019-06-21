@@ -10,7 +10,7 @@
 #include "Timer.h"
 #include "./bo_threadpool/Thread.h"
 
-namespace my
+namespace md
 {
 
 class TimerThread
@@ -26,6 +26,6 @@ private:
     Thread _thread;
 };
 
-} // end of namespace my
+} // end of namespace md
 
 #endif

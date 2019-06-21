@@ -10,7 +10,7 @@
 #include <fstream>
 #include <sstream>
 
-namespace my
+namespace md
 {
 
 /* create a LRU cache */
@@ -161,4 +161,4 @@ void LRUCache::updateLRU(const std::string & key)
     _hashMap[key] = _lruList.begin();
 }
 
-} // end of namespace my
+} // end of namespace md

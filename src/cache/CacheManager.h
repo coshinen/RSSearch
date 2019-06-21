@@ -12,7 +12,7 @@
 #include <vector>
 #include <map>
 
-namespace my
+namespace md
 {
 
 class LRUCache;
@@ -27,6 +27,6 @@ private:
     static std::vector<LRUCache> _cacheMap;
 };
 
-} // end of namespace my
+} // end of namespace md
 
 #endif

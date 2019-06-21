@@ -17,7 +17,7 @@
 #include <iostream>
 #include <functional>
 
-namespace my
+namespace md
 {
 
 RssSearchServer::RssSearchServer()
@@ -47,7 +47,7 @@ void RssSearchServer::start()
     _threadpool.start();
 
     /* start the timer */
-    my::TimerThread timerThread(&my::CacheManager::periodicUpdateCaches, 2, 66);
+    md::TimerThread timerThread(&md::CacheManager::periodicUpdateCaches, 2, 66);
     timerThread.start();
 
     _tcpServer.setConnectionCallback(std::bind(&RssSearchServer::onConnection, this, std::placeholders::_1));
@@ -118,4 +118,4 @@ void RssSearchServer::doTask(const TcpConnectionPtr & conn, const std::string & 
     }
 }
 
-} // end of namespace my
+} // end of namespace md

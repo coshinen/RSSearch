@@ -10,14 +10,14 @@
 int main(void)
 {
     /* load configuration */
-    my::Configuration::getInstance()->init(my::CONF_PATH);
-    my::Configuration::getInstance()->display();
+    md::Configuration::getInstance()->init(md::CONF_PATH);
+    md::Configuration::getInstance()->display();
 
     /* parse xml */
-    my::RssReader rssReader;
-    rssReader.init(my::Configuration::getInstance()->getConfigMap()[my::RES_PATH].c_str());
+    md::RssReader rssReader;
+    rssReader.init(md::Configuration::getInstance()->getConfigMap()[md::RES_PATH].c_str());
     rssReader.parseRss();
-    rssReader.dump(my::Configuration::getInstance()->getConfigMap()[my::PAGE_LIB_PATH].c_str());
+    rssReader.dump(md::Configuration::getInstance()->getConfigMap()[md::PAGE_LIB_PATH].c_str());
 
     return 0;
 }

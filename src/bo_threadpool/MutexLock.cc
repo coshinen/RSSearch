@@ -6,7 +6,7 @@
 
 #include "./bo_threadpool/MutexLock.h"
 
-namespace my
+namespace md
 {
 
 MutexLock::MutexLock()
@@ -38,4 +38,4 @@ pthread_mutex_t * MutexLock::getMutexPtr()
 bool MutexLock::isLocking() const
 { return _isLocking; }
 
-} // end of namespace my
+} // end of namespace md

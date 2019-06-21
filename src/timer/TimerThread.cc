@@ -9,7 +9,7 @@
 #include <iostream>
 #include <utility>
 
-namespace my
+namespace md
 {
 
 TimerThread::TimerThread(TimerCallback && cb, time_t initialTime, time_t intervalTime)
@@ -30,4 +30,4 @@ void TimerThread::stop()
     _thread.join();
 }
 
-} // end of namespace my
+} // end of namespace md

@@ -9,7 +9,7 @@
 
 #include <stdio.h>
 
-namespace my
+namespace md
 {
 
 class SocketIO
@@ -26,6 +26,6 @@ private:
     int _sockfd;
 };
 
-} // end of namespace my
+} // end of namespace md
 
 #endif

@@ -11,7 +11,7 @@
 #include <map>
 #include <sstream>
 
-namespace my
+namespace md
 {
 
 const char * const CONF_PATH = "../../createlib.conf";
@@ -58,6 +58,6 @@ private:
     std::map<std::string, std::string> _configMap;
 };
 
-} // end of namespace my
+} // end of namespace md
 
 #endif

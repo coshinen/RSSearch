@@ -11,7 +11,7 @@
 
 #include <pthread.h>
 
-namespace my
+namespace md
 {
 
 class MutexLock;
@@ -31,6 +31,6 @@ private:
     MutexLock & _mutex;
 };
 
-} // end of namespace my
+} // end of namespace md
 
 #endif

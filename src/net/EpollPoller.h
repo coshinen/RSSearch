@@ -18,7 +18,7 @@
 #include <memory>
 #include <functional>
 
-namespace my
+namespace md
 {
 
 class Acceptor;
@@ -69,6 +69,6 @@ private:
     EpollCallback _onCloseCb;
 };
 
-} // end of namespace my
+} // end of namespace md
 
 #endif

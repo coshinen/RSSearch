@@ -14,19 +14,19 @@ int main(void)
 {
     /* load Configuration */
     std::cout << "load configuration file..." << std::endl;
-    if (!my::Configuration::getInstance()->init(my::CONF_PATH)) {
+    if (!md::Configuration::getInstance()->init(md::CONF_PATH)) {
         std::cout << "load configuration file failed!" << std::endl;
         return -1;
     }
-    my::Configuration::getInstance()->display();
+    md::Configuration::getInstance()->display();
 
     /* initialize cppjieba */
     std::cout << "initialize cppjieba..." << std::endl;
-    my::WordSegmentation::getInstance();
+    md::WordSegmentation::getInstance();
     std::cout << "initializition completed " << std::endl;
 
     /* start the server */
-    my::RssSearchServer server;
+    md::RssSearchServer server;
     server.start();
 
     return 0;

@@ -14,7 +14,7 @@
 #include <queue>
 #include <functional>
 
-namespace my
+namespace md
 {
 
 class TaskQueue
@@ -39,6 +39,6 @@ private:
     bool _flag;
 };
 
-} // end of namespace my
+} // end of namespace md
 
 #endif

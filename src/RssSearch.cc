@@ -19,7 +19,7 @@
 #include <vector>
 #include <algorithm>
 
-namespace my
+namespace md
 {
 
 RssSearch::RssSearch()
@@ -370,4 +370,4 @@ std::string RssSearch::noAnswer()
     return writer.write(root);
 }
 
-} // end of namespace my
+} // end of namespace md

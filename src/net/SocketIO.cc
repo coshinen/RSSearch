@@ -7,7 +7,7 @@
 #include "SocketIO.h"
 #include "SocketUtil.h"
 
-namespace my
+namespace md
 {
 
 SocketIO::SocketIO(int sockfd)
@@ -95,4 +95,4 @@ size_t SocketIO::recv_peek(char * buf, size_t count)
     return nread;
 }
 
-} // end of namespace my
+} // end of namespace md

@@ -11,7 +11,7 @@
 #include "bo_threadpool/Threadpool.h"
 #include "RssSearch.h"
 
-namespace my
+namespace md
 {
 
 class RssSearchServer
@@ -34,6 +34,6 @@ private:
     bool _isExit;
 };
 
-} // end of namespace my
+} // end of namespace md
 
 #endif

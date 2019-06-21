@@ -14,7 +14,7 @@
 #include <map>
 #include <set>
 
-namespace my
+namespace md
 {
 
 const char * const CONF_PATH = "../searchengine.conf";
@@ -95,6 +95,6 @@ private:
     std::set<std::string> _stopWord;
 };
 
-} // end of namespace my
+} // end of namespace md
 
 #endif

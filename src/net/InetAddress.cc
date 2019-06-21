@@ -12,7 +12,7 @@
 #include <sys/socket.h>
 #include <arpa/inet.h>
 
-namespace my
+namespace md
 {
 
 InetAddress::InetAddress(unsigned short port)
@@ -50,4 +50,4 @@ const struct sockaddr_in * InetAddress::getSockAddrPtr() const
     return &_addr;
 }
 
-} // end of namespace my
+} // end of namespace md

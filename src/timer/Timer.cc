@@ -15,7 +15,7 @@
 #include <iostream>
 #include <utility>
 
-namespace my
+namespace md
 {
 
 Timer::Timer(TimerCallback && cb, time_t initialTime, time_t intervalTime)
@@ -102,4 +102,4 @@ void Timer::handleRead()
     }
 }
 
-} // end of namespace my
+} // end of namespace md

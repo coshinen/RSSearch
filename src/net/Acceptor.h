@@ -10,7 +10,7 @@
 #include "Socket.h"
 #include "InetAddress.h"
 
-namespace my
+namespace md
 {
 
 class Acceptor
@@ -33,6 +33,6 @@ private:
     InetAddress _addr;
 };
 
-} // end of namespace my
+} // end of namespace md
 
 #endif

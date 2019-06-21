@@ -7,7 +7,7 @@
 #include "./bo_threadpool/Condition.h"
 #include "./bo_threadpool/MutexLock.h"
 
-namespace my
+namespace md
 {
 
 Condition::Condition(MutexLock & mutex)
@@ -36,4 +36,4 @@ void Condition::notifyAll()
     pthread_cond_broadcast(&_cond);
 }
 
-} // end of namespace my
+} // end of namespace md
