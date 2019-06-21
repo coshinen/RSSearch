@@ -17,21 +17,21 @@ namespace my
 class RssSearchServer
 {
 public:
-	RssSearchServer();
-	~RssSearchServer();
+    RssSearchServer();
+    ~RssSearchServer();
 
-	void start();
-	void stop();
+    void start();
+    void stop();
 private:
-	void onConnection(const TcpConnectionPtr & conn);
-	void onMessage(const TcpConnectionPtr & conn);
-	void onClose(const TcpConnectionPtr & conn);
-	void doTask(const TcpConnectionPtr & conn, const std::string & msg);
+    void onConnection(const TcpConnectionPtr & conn);
+    void onMessage(const TcpConnectionPtr & conn);
+    void onClose(const TcpConnectionPtr & conn);
+    void doTask(const TcpConnectionPtr & conn, const std::string & msg);
 private:
-	Threadpool _threadpool;
-	TcpServer _tcpServer;
-	RssSearch _rssSearch;
-	bool _isExit;
+    Threadpool _threadpool;
+    TcpServer _tcpServer;
+    RssSearch _rssSearch;
+    bool _isExit;
 };
 
 } // end of namespace my

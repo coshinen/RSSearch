@@ -20,11 +20,11 @@ class LRUCache;
 class CacheManager
 {
 public:
-	static void initCache(const std::size_t & cacheNum, const char * fileName);
-	static LRUCache & getCache(const std::size_t & idx);
-	static void periodicUpdateCaches();
+    static void initCache(const std::size_t & cacheNum, const char * fileName);
+    static LRUCache & getCache(const std::size_t & idx);
+    static void periodicUpdateCaches();
 private:
-	static std::vector<LRUCache> _cacheMap;
+    static std::vector<LRUCache> _cacheMap;
 };
 
 } // end of namespace my

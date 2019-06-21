@@ -9,15 +9,15 @@
 
 int main(void)
 {
-	/* load configuration */
-	my::Configuration::getInstance()->init(my::CONF_PATH);
-	my::Configuration::getInstance()->display();
+    /* load configuration */
+    my::Configuration::getInstance()->init(my::CONF_PATH);
+    my::Configuration::getInstance()->display();
 
-	/* parse xml */
-	my::RssReader rssReader;
-	rssReader.init(my::Configuration::getInstance()->getConfigMap()[my::RES_PATH].c_str());
-	rssReader.parseRss();
-	rssReader.dump(my::Configuration::getInstance()->getConfigMap()[my::PAGE_LIB_PATH].c_str());
+    /* parse xml */
+    my::RssReader rssReader;
+    rssReader.init(my::Configuration::getInstance()->getConfigMap()[my::RES_PATH].c_str());
+    rssReader.parseRss();
+    rssReader.dump(my::Configuration::getInstance()->getConfigMap()[my::PAGE_LIB_PATH].c_str());
 
-	return 0;
+    return 0;
 }

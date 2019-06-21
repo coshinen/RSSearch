@@ -19,24 +19,24 @@ namespace my
 
 class TaskQueue
 {
-	typedef std::function<void()> TaskCallback;
+    typedef std::function<void()> TaskCallback;
 public:
-	TaskQueue(const std::size_t & size = 10);
+    TaskQueue(const std::size_t & size = 10);
 
-	bool full() const;
-	bool empty() const;
+    bool full() const;
+    bool empty() const;
 
-	void push(const TaskCallback && elem);
-	TaskCallback pop();
+    void push(const TaskCallback && elem);
+    TaskCallback pop();
 
-	void wakeUp();
+    void wakeUp();
 private:
-	std::size_t _size;
-	std::queue<TaskCallback> _que;
-	MutexLock _mutex;
-	Condition _notFull;
-	Condition _notEmpty;
-	bool _flag;
+    std::size_t _size;
+    std::queue<TaskCallback> _que;
+    MutexLock _mutex;
+    Condition _notFull;
+    Condition _notEmpty;
+    bool _flag;
 };
 
 } // end of namespace my

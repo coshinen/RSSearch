@@ -18,16 +18,16 @@ TcpServer::TcpServer(const std::string & ip, unsigned short port)
 
 void TcpServer::start()
 {
-	_acceptor.ready();
-	_poller.setConnectionCallback(_connectionCb);
-	_poller.setMessageCallback(_messageCb);
-	_poller.setCloseCallback(_closeCb);
-	_poller.loop();
+    _acceptor.ready();
+    _poller.setConnectionCallback(_connectionCb);
+    _poller.setMessageCallback(_messageCb);
+    _poller.setCloseCallback(_closeCb);
+    _poller.loop();
 }
 
 void TcpServer::stop()
 {
-	_poller.unloop();
+    _poller.unloop();
 }
 
 void TcpServer::setConnectionCallback(TcpServerCallback cb)

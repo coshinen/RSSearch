@@ -13,11 +13,11 @@ namespace my
 class Noncopyable
 {
 protected:
-	Noncopyable() {}
-	~Noncopyable() {}
+    Noncopyable() {}
+    ~Noncopyable() {}
 private:
-	Noncopyable(const Noncopyable &);
-	Noncopyable & operator=(const Noncopyable &);
+    Noncopyable(const Noncopyable &);
+    Noncopyable & operator=(const Noncopyable &);
 };
 
 } // end of namespace my

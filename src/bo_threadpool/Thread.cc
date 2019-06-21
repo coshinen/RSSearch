@@ -27,11 +27,11 @@ ThreadData::ThreadData(ThreadCallback && cb, const std::string & name)
 
 void ThreadData::runInThread()
 {
-	curthread::threadName = _name.empty() ? "my" : _name.c_str();
-	::printf("I am thread: %s\n", curthread::threadName);
+    curthread::threadName = _name.empty() ? "my" : _name.c_str();
+    ::printf("I am thread: %s\n", curthread::threadName);
 
-	if (_cb)
-		_cb();
+    if (_cb)
+        _cb();
 }
 
 Thread::Thread(ThreadCallback && cb, const std::string & name)
@@ -43,30 +43,30 @@ Thread::Thread(ThreadCallback && cb, const std::string & name)
 
 Thread::~Thread()
 {
-	::printf("~Thread()\n");
-	if (_isRunning) {
-		if(-1 == ::pthread_detach(_pthId)) {
-			::perror("pthread_detach");
-		} else {
-			::printf("detach succeeded\n");
-		}
-		_isRunning = false;
-	}
+    ::printf("~Thread()\n");
+    if (_isRunning) {
+        if(-1 == ::pthread_detach(_pthId)) {
+            ::perror("pthread_detach");
+        } else {
+            ::printf("detach succeeded\n");
+        }
+        _isRunning = false;
+    }
 }
 
 void Thread::start()
 {
-	ThreadData * pThreadData = new ThreadData(std::move(_cb), _name);
-	::pthread_create(&_pthId, NULL, threadFunc, pThreadData);
-	_isRunning = true;
+    ThreadData * pThreadData = new ThreadData(std::move(_cb), _name);
+    ::pthread_create(&_pthId, NULL, threadFunc, pThreadData);
+    _isRunning = true;
 }
 
 void Thread::join()
 {
-	if (_isRunning) {
-		::pthread_join(_pthId, NULL);
-		_isRunning = false;
-	}
+    if (_isRunning) {
+        ::pthread_join(_pthId, NULL);
+        _isRunning = false;
+    }
 }
 
 bool Thread::isRunning() const
@@ -77,10 +77,10 @@ bool Thread::isRunning() const
 
 void * Thread::threadFunc(void * arg)
 {
-	ThreadData * pThreadData = static_cast<ThreadData*>(arg);
-	if (pThreadData)
-		pThreadData->runInThread();
-	return NULL;
+    ThreadData * pThreadData = static_cast<ThreadData*>(arg);
+    if (pThreadData)
+        pThreadData->runInThread();
+    return NULL;
 }
 
 } // end of namespace my

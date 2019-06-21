@@ -15,15 +15,15 @@ namespace my
 class SocketIO
 {
 public:
-	SocketIO(int sockfd);
+    SocketIO(int sockfd);
 
-	size_t readN(char * buf, size_t count);
-	size_t writeN(const char * buf, size_t count);
-	size_t readLine(char * buf, size_t maxLen);
+    size_t readN(char * buf, size_t count);
+    size_t writeN(const char * buf, size_t count);
+    size_t readLine(char * buf, size_t maxLen);
 private:
-	size_t recv_peek(char * buf, size_t count);
+    size_t recv_peek(char * buf, size_t count);
 private:
-	int _sockfd;
+    int _sockfd;
 };
 
 } // end of namespace my

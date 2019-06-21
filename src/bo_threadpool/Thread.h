@@ -25,36 +25,36 @@ extern __thread const char * threadName;
 
 struct ThreadData
 {
-	typedef std::function<void()> ThreadCallback;
+    typedef std::function<void()> ThreadCallback;
 
-	ThreadData(ThreadCallback && cb, const std::string & name);
-	void runInThread();
+    ThreadData(ThreadCallback && cb, const std::string & name);
+    void runInThread();
 
-	ThreadCallback _cb;
-	std::string _name;
+    ThreadCallback _cb;
+    std::string _name;
 };
 
 class Thread
 : Noncopyable
 {
-	typedef std::function<void()> ThreadCallback;
+    typedef std::function<void()> ThreadCallback;
 public:
-	Thread(ThreadCallback && cb, const std::string & name = "");
-	~Thread();
+    Thread(ThreadCallback && cb, const std::string & name = "");
+    ~Thread();
 
-	void start();
-	void join();
-	bool isRunning() const;
+    void start();
+    void join();
+    bool isRunning() const;
 
-	::pthread_t getPthId();
+    ::pthread_t getPthId();
 private:
-	static void * threadFunc(void * arg);
+    static void * threadFunc(void * arg);
 private:
-	::pthread_t _pthId;
-	bool _isRunning;
+    ::pthread_t _pthId;
+    bool _isRunning;
 
-	ThreadCallback _cb;
-	std::string _name;
+    ThreadCallback _cb;
+    std::string _name;
 };
 
 } // end of namespace my

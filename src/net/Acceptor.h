@@ -16,21 +16,21 @@ namespace my
 class Acceptor
 {
 public:
-	Acceptor(int listenfd, const InetAddress & add);
+    Acceptor(int listenfd, const InetAddress & add);
 
-	void ready();
-	int accept();
+    void ready();
+    int accept();
 
-	int fd() const { return _listenSock.fd(); }
+    int fd() const { return _listenSock.fd(); }
 private:
-	void setReuseAddr(bool on);
-	void setReusePort(bool on);
+    void setReuseAddr(bool on);
+    void setReusePort(bool on);
 
-	void bind();
-	void listen();
+    void bind();
+    void listen();
 private:
-	Socket _listenSock;
-	InetAddress _addr;
+    Socket _listenSock;
+    InetAddress _addr;
 };
 
 } // end of namespace my

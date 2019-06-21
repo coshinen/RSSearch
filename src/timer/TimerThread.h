@@ -15,15 +15,15 @@ namespace my
 
 class TimerThread
 {
-	typedef std::function<void()> TimerCallback;
+    typedef std::function<void()> TimerCallback;
 public:
-	TimerThread(TimerCallback && cb, time_t initialTime, time_t intervalTime);
+    TimerThread(TimerCallback && cb, time_t initialTime, time_t intervalTime);
 
-	void start();
-	void stop();
+    void start();
+    void stop();
 private:
-	Timer _timer;
-	Thread _thread;
+    Timer _timer;
+    Thread _thread;
 };
 
 } // end of namespace my

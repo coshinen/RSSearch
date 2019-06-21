@@ -26,36 +26,36 @@ bool TaskQueue::empty() const
 
 void TaskQueue::push(const TaskCallback && elem)
 {
-	MutexLockGuard mlg(_mutex);
+    MutexLockGuard mlg(_mutex);
 
-	while (full())
-		_notFull.wait();
+    while (full())
+        _notFull.wait();
 
-	_que.push(std::move(elem));
-	_notEmpty.notify();
+    _que.push(std::move(elem));
+    _notEmpty.notify();
 }
 
 TaskQueue::TaskCallback TaskQueue::pop()
 {
-	MutexLockGuard mlg(_mutex);
-	
-	while (_flag && empty())
-		_notEmpty.wait();
+    MutexLockGuard mlg(_mutex);
+    
+    while (_flag && empty())
+        _notEmpty.wait();
 
-	if (_flag) {
-		TaskCallback elem = _que.front();
-		_que.pop();
-		_notFull.notify();
-	
-		return elem;
-	} else
-		return NULL;
+    if (_flag) {
+        TaskCallback elem = _que.front();
+        _que.pop();
+        _notFull.notify();
+    
+        return elem;
+    } else
+        return NULL;
 }
 
 void TaskQueue::wakeUp()
 {
-	_flag = false;
-	_notEmpty.notifyAll();
+    _flag = false;
+    _notEmpty.notifyAll();
 }
 
 } // end of namespace my

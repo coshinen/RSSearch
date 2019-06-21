@@ -26,36 +26,36 @@ const char * const INVERT_LIB_PATH = "invertlib";
 
 inline std::string int2str(std::size_t inum)
 {
-	std::ostringstream oss;
-	oss << inum;
-	return oss.str();
+    std::ostringstream oss;
+    oss << inum;
+    return oss.str();
 }
 
 class Configuration
 {
 public:
-	static Configuration * getInstance();
+    static Configuration * getInstance();
 
-	bool init(const char * filePath);
+    bool init(const char * filePath);
 
-	void display();
+    void display();
 
-	std::map<std::string, std::string> & getConfigMap();
+    std::map<std::string, std::string> & getConfigMap();
 private:
-	Configuration();
-	~Configuration();
-	
-	class AutoRelease
-	{
-	public:
-		AutoRelease();
-		~AutoRelease();
-	};
+    Configuration();
+    ~Configuration();
+    
+    class AutoRelease
+    {
+    public:
+        AutoRelease();
+        ~AutoRelease();
+    };
 private:
-	static Configuration * _pInstance;
-	static AutoRelease _autoRelease;
+    static Configuration * _pInstance;
+    static AutoRelease _autoRelease;
 
-	std::map<std::string, std::string> _configMap;
+    std::map<std::string, std::string> _configMap;
 };
 
 } // end of namespace my

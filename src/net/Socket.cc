@@ -21,39 +21,39 @@ Socket::Socket(int sockfd)
 
 Socket::~Socket()
 {
-	::close(_sockfd);
+    ::close(_sockfd);
 }
 
 void Socket::shutdownWrite()
 {
-	if (-1 == ::shutdown(_sockfd, SHUT_WR)) {
-		perror("shutdown write error!");
-	}
+    if (-1 == ::shutdown(_sockfd, SHUT_WR)) {
+        perror("shutdown write error!");
+    }
 }
 
 void Socket::nonblock()
 {
-	setNonblock(_sockfd);
+    setNonblock(_sockfd);
 }
 
 InetAddress Socket::getLocalAddr(int sockfd)
 {
-	struct sockaddr_in addr;
-	socklen_t len = sizeof(struct sockaddr_in);
-	if (-1 == ::getsockname(sockfd, (struct sockaddr *)&addr, &len)) {
-		perror("getsockname error");
-	}
-	return InetAddress(addr);
+    struct sockaddr_in addr;
+    socklen_t len = sizeof(struct sockaddr_in);
+    if (-1 == ::getsockname(sockfd, (struct sockaddr *)&addr, &len)) {
+        perror("getsockname error");
+    }
+    return InetAddress(addr);
 }
 
 InetAddress Socket::getPeerAddr(int sockfd)
 {
-	struct sockaddr_in addr;
-	socklen_t len = sizeof(struct sockaddr_in);
-	if (-1 == ::getpeername(sockfd, (struct sockaddr *)&addr, &len)) {
-		perror("getpeername error");
-	}
-	return InetAddress(addr);
+    struct sockaddr_in addr;
+    socklen_t len = sizeof(struct sockaddr_in);
+    if (-1 == ::getpeername(sockfd, (struct sockaddr *)&addr, &len)) {
+        perror("getpeername error");
+    }
+    return InetAddress(addr);
 }
 
 } // end of namespace my

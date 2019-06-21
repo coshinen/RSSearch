@@ -19,15 +19,15 @@ TimerThread::TimerThread(TimerCallback && cb, time_t initialTime, time_t interva
 
 void TimerThread::start()
 {
-	_thread.start();
-	std::cout << "---- timer start ----" << std::endl;
+    _thread.start();
+    std::cout << "---- timer start ----" << std::endl;
 }
 
 void TimerThread::stop()
 {
-	_timer.stop();
-	std::cout << "---- timer stop ----" << std::endl;
-	_thread.join();
+    _timer.stop();
+    std::cout << "---- timer stop ----" << std::endl;
+    _thread.join();
 }
 
 } // end of namespace my

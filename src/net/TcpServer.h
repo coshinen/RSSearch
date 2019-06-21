@@ -17,24 +17,24 @@ namespace my
 
 class TcpServer
 {
-	typedef EpollPoller::EpollCallback TcpServerCallback;
+    typedef EpollPoller::EpollCallback TcpServerCallback;
 public:
-	TcpServer(unsigned short port);
-	TcpServer(const std::string & ip, unsigned short port);
+    TcpServer(unsigned short port);
+    TcpServer(const std::string & ip, unsigned short port);
 
-	void start();
-	void stop();
+    void start();
+    void stop();
 
-	void setConnectionCallback(TcpServerCallback cb);
-	void setMessageCallback(TcpServerCallback cb);
-	void setCloseCallback(TcpServerCallback cb);
+    void setConnectionCallback(TcpServerCallback cb);
+    void setMessageCallback(TcpServerCallback cb);
+    void setCloseCallback(TcpServerCallback cb);
 private:
-	Acceptor _acceptor;
-	EpollPoller _poller;
+    Acceptor _acceptor;
+    EpollPoller _poller;
 
-	TcpServerCallback _connectionCb;
-	TcpServerCallback _messageCb;
-	TcpServerCallback _closeCb;
+    TcpServerCallback _connectionCb;
+    TcpServerCallback _messageCb;
+    TcpServerCallback _closeCb;
 };
 
 } // end of namespace my

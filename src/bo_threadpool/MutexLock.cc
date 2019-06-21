@@ -12,24 +12,24 @@ namespace my
 MutexLock::MutexLock()
 : _isLocking(false)
 {
-	::pthread_mutex_init(&_mutex, NULL);
+    ::pthread_mutex_init(&_mutex, NULL);
 }
 
 MutexLock::~MutexLock()
 {
-	pthread_mutex_destroy(&_mutex);
+    pthread_mutex_destroy(&_mutex);
 }
 
 void MutexLock::lock()
 {
-	pthread_mutex_lock(&_mutex); // 可能阻塞。
-	_isLocking = true;
+    pthread_mutex_lock(&_mutex); // 可能阻塞。
+    _isLocking = true;
 }
 
 void MutexLock::unlock()
 {
-	pthread_mutex_unlock(&_mutex);
-	_isLocking = false;
+    pthread_mutex_unlock(&_mutex);
+    _isLocking = false;
 }
 
 pthread_mutex_t * MutexLock::getMutexPtr()

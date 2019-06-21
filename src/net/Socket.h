@@ -18,19 +18,19 @@ class Socket
 : Noncopyable
 {
 public:
-	Socket();
-	Socket(int sockfd);
-	~Socket();
+    Socket();
+    Socket(int sockfd);
+    ~Socket();
 
-	void shutdownWrite();
-	int fd() const { return _sockfd; }
+    void shutdownWrite();
+    int fd() const { return _sockfd; }
 
-	void nonblock();
+    void nonblock();
 
-	static InetAddress getLocalAddr(int sockfd);
-	static InetAddress getPeerAddr(int sockfd);
+    static InetAddress getLocalAddr(int sockfd);
+    static InetAddress getPeerAddr(int sockfd);
 private:
-	int _sockfd;
+    int _sockfd;
 };
 
 } // end of namespace my

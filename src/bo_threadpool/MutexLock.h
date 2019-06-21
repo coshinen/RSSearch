@@ -18,33 +18,33 @@ class MutexLock
 : Noncopyable
 {
 public:
-	MutexLock();
-	~MutexLock();
+    MutexLock();
+    ~MutexLock();
 
-	void lock();
-	void unlock();
+    void lock();
+    void unlock();
 
-	::pthread_mutex_t * getMutexPtr();
-	bool isLocking() const;
+    ::pthread_mutex_t * getMutexPtr();
+    bool isLocking() const;
 private:
-	::pthread_mutex_t _mutex;
-	bool _isLocking;
+    ::pthread_mutex_t _mutex;
+    bool _isLocking;
 };
 
 class MutexLockGuard
 {
 public:
-	MutexLockGuard(MutexLock & mutex)
-	: _mutex(mutex)
-	{
-		_mutex.lock();
-	}
-	~MutexLockGuard()
-	{
-		_mutex.unlock();
-	}
+    MutexLockGuard(MutexLock & mutex)
+    : _mutex(mutex)
+    {
+        _mutex.lock();
+    }
+    ~MutexLockGuard()
+    {
+        _mutex.unlock();
+    }
 private:
-	MutexLock & _mutex;
+    MutexLock & _mutex;
 };
 
 } // end of namespace my

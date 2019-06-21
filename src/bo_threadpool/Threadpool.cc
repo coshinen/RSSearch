@@ -18,45 +18,45 @@ Threadpool::Threadpool(const std::size_t & threadNums, const std::size_t & queSi
 , _taskQue(_queSize)
 , _isExit(false)
 {
-	_threads.reserve(_threadNums);
+    _threads.reserve(_threadNums);
 }
 
 Threadpool::~Threadpool()
 {
-	if (!_isExit)
-		stop();
+    if (!_isExit)
+        stop();
 }
 
 void Threadpool::start()
 {
-	for (std::size_t idx = 0; idx != _threadNums; ++idx)
-	{
-		_threads.push_back(std::shared_ptr<Thread>(new Thread(std::bind(&Threadpool::threadFunc, this), uint2str(idx))));
-	}
+    for (std::size_t idx = 0; idx != _threadNums; ++idx)
+    {
+        _threads.push_back(std::shared_ptr<Thread>(new Thread(std::bind(&Threadpool::threadFunc, this), uint2str(idx))));
+    }
 
-	for (auto & thread : _threads)
-	{
-		thread->start();
-	}
+    for (auto & thread : _threads)
+    {
+        thread->start();
+    }
 }
 
 void Threadpool::stop()
 {
-	if (!_isExit) {
-		while (!_taskQue.empty())
-		{
-			::sleep(2);
-		}
+    if (!_isExit) {
+        while (!_taskQue.empty())
+        {
+            ::sleep(2);
+        }
 
-		_isExit = true;
+        _isExit = true;
 
-		_taskQue.wakeUp();
+        _taskQue.wakeUp();
 
-		for (auto & thread : _threads)
-		{
-			thread->join();
-		}
-	}
+        for (auto & thread : _threads)
+        {
+            thread->join();
+        }
+    }
 }
 
 void Threadpool::addTask(TaskCallback && cb)
@@ -67,12 +67,12 @@ Threadpool::TaskCallback Threadpool::getTask()
 
 void Threadpool::threadFunc()
 {
-	while (!_isExit)
-	{
-		TaskCallback task = getTask();
-		if (task)
-			task();
-	}
+    while (!_isExit)
+    {
+        TaskCallback task = getTask();
+        if (task)
+            task();
+    }
 }
 
 } // end of namespace my

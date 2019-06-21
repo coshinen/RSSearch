@@ -21,24 +21,24 @@ namespace my
 
 class Threadpool
 {
-	typedef std::function<void()> TaskCallback;
+    typedef std::function<void()> TaskCallback;
 public:
-	Threadpool(const std::size_t & threadNums = 4, const std::size_t & queSize = 10);
-	~Threadpool();
+    Threadpool(const std::size_t & threadNums = 4, const std::size_t & queSize = 10);
+    ~Threadpool();
 
-	void start();
-	void stop();
+    void start();
+    void stop();
 
-	void addTask(TaskCallback && cb);
+    void addTask(TaskCallback && cb);
 private:
-	TaskCallback getTask();
-	void threadFunc();
+    TaskCallback getTask();
+    void threadFunc();
 private:
-	std::size_t _threadNums;
-	std::size_t _queSize;
-	TaskQueue _taskQue;
-	std::vector<std::shared_ptr<Thread> > _threads;
-	bool _isExit;
+    std::size_t _threadNums;
+    std::size_t _queSize;
+    TaskQueue _taskQue;
+    std::vector<std::shared_ptr<Thread> > _threads;
+    bool _isExit;
 };
 
 } // end of namespace my

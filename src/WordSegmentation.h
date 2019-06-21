@@ -18,24 +18,24 @@ namespace my
 class WordSegmentation
 {
 public:
-	static WordSegmentation * getInstance();
+    static WordSegmentation * getInstance();
 
-	void cut(const std::string & str, std::vector<std::string> & words);
+    void cut(const std::string & str, std::vector<std::string> & words);
 private:
-	WordSegmentation();
-	~WordSegmentation();
+    WordSegmentation();
+    ~WordSegmentation();
 
-	class AutoRelease
-	{
-	public:
-		AutoRelease();
-		~AutoRelease();
-	};
+    class AutoRelease
+    {
+    public:
+        AutoRelease();
+        ~AutoRelease();
+    };
 private:
-	static WordSegmentation * _pInstance;
-	static AutoRelease _autoRelease;
+    static WordSegmentation * _pInstance;
+    static AutoRelease _autoRelease;
 
-	cppjieba::Jieba _jieba;
+    cppjieba::Jieba _jieba;
 };
 
 } // end of namespace my

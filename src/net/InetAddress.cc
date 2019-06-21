@@ -17,18 +17,18 @@ namespace my
 
 InetAddress::InetAddress(unsigned short port)
 {
-	::bzero(&_addr, sizeof(_addr));
-	_addr.sin_family = AF_INET;
-	_addr.sin_port = ::htons(port);
-	_addr.sin_addr.s_addr = INADDR_ANY;
+    ::bzero(&_addr, sizeof(_addr));
+    _addr.sin_family = AF_INET;
+    _addr.sin_port = ::htons(port);
+    _addr.sin_addr.s_addr = INADDR_ANY;
 }
 
 InetAddress::InetAddress(const char * pIp, unsigned short port)
 {
-	::bzero(&_addr, sizeof(_addr));
-	_addr.sin_family = AF_INET;
-	_addr.sin_port = ::htons(port);
-	_addr.sin_addr.s_addr = ::inet_addr(pIp);
+    ::bzero(&_addr, sizeof(_addr));
+    _addr.sin_family = AF_INET;
+    _addr.sin_port = ::htons(port);
+    _addr.sin_addr.s_addr = ::inet_addr(pIp);
 }
 
 InetAddress::InetAddress(const struct sockaddr_in & addr)
@@ -37,17 +37,17 @@ InetAddress::InetAddress(const struct sockaddr_in & addr)
 
 std::string InetAddress::ip() const
 {
-	return std::string(::inet_ntoa(_addr.sin_addr));
+    return std::string(::inet_ntoa(_addr.sin_addr));
 }
 
 unsigned short InetAddress::port() const
 {
-	return ::ntohs(_addr.sin_port);
+    return ::ntohs(_addr.sin_port);
 }
 
 const struct sockaddr_in * InetAddress::getSockAddrPtr() const
 {
-	return &_addr;
+    return &_addr;
 }
 
 } // end of namespace my

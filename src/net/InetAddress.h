@@ -16,15 +16,15 @@ namespace my
 class InetAddress
 {
 public:
-	InetAddress(unsigned short port);
-	InetAddress(const char * pIp, unsigned short port);
-	InetAddress(const struct sockaddr_in & addr);
+    InetAddress(unsigned short port);
+    InetAddress(const char * pIp, unsigned short port);
+    InetAddress(const struct sockaddr_in & addr);
 
-	std::string ip() const;
-	unsigned short port() const;
-	const struct sockaddr_in * getSockAddrPtr() const;
+    std::string ip() const;
+    unsigned short port() const;
+    const struct sockaddr_in * getSockAddrPtr() const;
 private:
-	struct sockaddr_in _addr;
+    struct sockaddr_in _addr;
 };
 
 } // end of namespace my
