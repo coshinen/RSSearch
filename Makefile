@@ -1,4 +1,5 @@
 INC_DIR:= src src/net src/bo_threadpool src/timer src/cache depends
+LIB_DIR:= lib
 SRC_DIR:= src
 NET_DIR:= src/net
 TP_DIR:= src/bo_threadpool
@@ -11,7 +12,7 @@ LIBS:= -lpthread -ljson -lcpp_redis -ltacopie
 
 CXX:= g++
 
-CXXFLAGS:= -w -g -std=c++11 $(addprefix -I, $(INC_DIR)) $(LIBS) -Wno-deprecated
+CXXFLAGS:= -w -g -std=c++11 $(addprefix -I, $(INC_DIR)) $(addprefix -L, $(LIB_DIR)) $(LIBS) -Wno-deprecated
 
 EXE:= searchengined
 

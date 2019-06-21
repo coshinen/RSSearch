@@ -1,4 +1,5 @@
 INC_DIR:= . ../../depends
+LIB_DIR:= ../../lib
 SRC_DIR:= .
 DIST_DIR:= ..
 INST_DIR:= /usr/local/bin
@@ -8,7 +9,7 @@ LIBS:= -lboost_regex
 
 CXX:=g++
 
-CXXFLAGS:= -w -g -std=c++11 $(addprefix -I, $(INC_DIR)) $(LIBS) -Wno-deprecated
+CXXFLAGS:= -w -g -std=c++11 $(addprefix -I, $(INC_DIR)) $(addprefix -L, $(LIB_DIR)) $(LIBS) -Wno-deprecated
 
 EXE:= createlib
 
