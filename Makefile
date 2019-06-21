@@ -13,7 +13,7 @@ CXX:= g++
 
 CXXFLAGS:= -w -g -std=c++11 $(addprefix -I, $(INC_DIR)) $(LIBS) -Wno-deprecated
 
-EXE:= rssSearchEngined
+EXE:= searchengined
 
 $(EXE):$(OBJS)
 	$(CXX) -o $(SRC_DIR)/$(EXE) $(OBJS) $(CXXFLAGS)

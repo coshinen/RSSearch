@@ -17,7 +17,7 @@
 namespace my
 {
 
-const char * const CONF_PATH = "../conf/Config.json";
+const char * const CONF_PATH = "../searchengine.conf";
 const char * const THREAD_NUM = "thread_num";
 const char * const TASK_NUM = "task_num";
 const char * const IP = "ip";
