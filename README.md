@@ -39,5 +39,6 @@ $ sudo apt install redis-server
 ## Usage
 
 ```
-$ ./rssSearchEngined
+$ ./createlib
+$ ./searchengined
 ```
