@@ -2,6 +2,10 @@
 
 A mini search engine with rss.
 
+## Todo
+
+- [ ] remove json, remake conf file system
+
 ## To Build
 
 ```
