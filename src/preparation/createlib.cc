@@ -1,11 +1,11 @@
  ///
- /// @file    createLibrary.cc
+ /// @file    createlib.cc
  /// @author  mistydew(mistydew@qq.com)
  /// @date    2017-11-12 09:57:31
  ///
 
-#include "Configuration.h"
-#include "RssReader.h"
+#include "configuration.h"
+#include "rssreader.h"
 
 int main(void)
 {

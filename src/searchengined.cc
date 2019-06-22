@@ -1,12 +1,12 @@
  ///
- /// @file    testServer.cc
+ /// @file    searchengined.cc
  /// @author  mistydew(mistydew@qq.com)
  /// @date    2017-11-04 17:25:12
  ///
 
-#include "Configuration.h"
-#include "WordSegmentation.h"
-#include "RssSearchServer.h"
+#include "configuration.h"
+#include "wordsegmentation.h"
+#include "rsssearchserver.h"
 
 #include <iostream>
 
