@@ -1,5 +1,7 @@
 # rssSearchEngine
 
+[![Build Status](https://travis-ci.com/mistydew/rssSearchEngine.svg?branch=master)](https://travis-ci.com/mistydew/rssSearchEngine)
+
 A mini search engine with rss.
 
 ## Todo
