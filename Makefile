@@ -12,23 +12,23 @@ LIBS:= -lpthread -ljson -lcpp_redis -ltacopie
 
 CXX:= g++
 
-CXXFLAGS:= -w -g -std=c++11 $(addprefix -I, $(INC_DIR)) $(addprefix -L, $(LIB_DIR)) $(LIBS) -Wno-deprecated
+CXXFLAGS:= -std=c++11 -w -g -Wno-deprecated $(addprefix -I, $(INC_DIR)) $(addprefix -L, $(LIB_DIR)) $(LIBS)
 
-EXE:= searchengined
+ELF:= searchengined
 
-$(EXE):$(OBJS)
-	$(CXX) -o $(SRC_DIR)/$(EXE) $(OBJS) $(CXXFLAGS)
+$(ELF):$(OBJS)
+	$(CXX) -o $(SRC_DIR)/$(ELF) $(OBJS) $(CXXFLAGS)
 	cd src/preparation; make
 
 install:
-	install -m 0755 $(SRC_DIR)/$(EXE) $(INS_DIR)
+	install -m 0755 $(SRC_DIR)/$(ELF) $(INS_DIR)
 	cd src/preparation; make install
 
 uninstall:
-	rm -rf $(INS_DIR)/$(EXE)
+	rm -rf $(INS_DIR)/$(ELF)
 	cd src/preparation; make uninstall
 
 clean:
-	rm -rf $(SRC_DIR)/$(EXE)
+	rm -rf $(SRC_DIR)/$(ELF)
 	rm -rf $(OBJS)
 	cd src/preparation; make clean

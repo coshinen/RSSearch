@@ -9,19 +9,19 @@ LIBS:= -lboost_regex
 
 CXX:=g++
 
-CXXFLAGS:= -w -g -std=c++11 $(addprefix -I, $(INC_DIR)) $(addprefix -L, $(LIB_DIR)) $(LIBS) -Wno-deprecated
+CXXFLAGS:= -std=c++11 -w -g -Wno-deprecated $(addprefix -I, $(INC_DIR)) $(addprefix -L, $(LIB_DIR)) $(LIBS)
 
-EXE:= createlib
+ELF:= createlib
 
-$(EXE):$(OBJS)
-	$(CXX) -o $(SRC_DIR)/$(DIST_DIR)/$(EXE) $(OBJS) $(CXXFLAGS)
+$(ELF):$(OBJS)
+	$(CXX) -o $(SRC_DIR)/$(DIST_DIR)/$(ELF) $(OBJS) $(CXXFLAGS)
 
 install:
-	install -m 0755 $(SRC_DIR)/$(DIST_DIR)/$(EXE) $(INST_DIR)
+	install -m 0755 $(SRC_DIR)/$(DIST_DIR)/$(ELF) $(INST_DIR)
 
 uninstall:
-	rm -rf $(INST_DIR)/$(EXE)
+	rm -rf $(INST_DIR)/$(ELF)
 
 clean:
-	rm -rf $(SRC_DIR)/$(DIST_DIR)/$(EXE)
+	rm -rf $(SRC_DIR)/$(DIST_DIR)/$(ELF)
 	rm -rf $(OBJS)
