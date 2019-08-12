@@ -2,7 +2,14 @@
 
 [![Build Status](https://travis-ci.com/mistydew/rssSearchEngine.svg?branch=master)](https://travis-ci.com/mistydew/rssSearchEngine)
 
+## What is rssSearchEngine?
+
 A mini search engine with rss.
+
+## License
+
+rssSearchEngine is released under the terms of the MIT license.
+See [LICENSE](LICENSE) for more information or see https://opensource.org/licenses/MIT.
 
 ## Todo
 
