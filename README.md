@@ -1,4 +1,7 @@
-# rssSearchEngine [![Build Status](https://travis-ci.com/mistydew/rssSearchEngine.svg?branch=master)](https://travis-ci.com/mistydew/rssSearchEngine)
+# rssSearchEngine
+
+![GitHub Actions workflow status](https://github.com/mistydew/rssSearchEngine/workflows/C/C++%20CI/badge.svg)
+[![Build Status](https://travis-ci.com/mistydew/rssSearchEngine.svg?branch=master)](https://travis-ci.com/mistydew/rssSearchEngine)
 
 A mini search engine with rss.
 
