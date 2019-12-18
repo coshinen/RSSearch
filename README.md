@@ -26,7 +26,7 @@ Library  | Purpose       | Description
 ---------|---------------|-------------
 libboost | Utility       | Library for threading, data structures, etc.
 cppjieba | Segmentation  | Chinese word segmentation
-simhash  | Deduplication | Duplicate removal
+simhash  | Deduplication | Remove duplicate
 Redis    | Redis         | Data storage, Cache
 
 ## Linux Distribution Specific Instructions
