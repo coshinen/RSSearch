@@ -1,19 +1,19 @@
-# rssSearchEngine
+# RSSearch
 
-![](https://github.com/mistydew/rssSearchEngine/workflows/C/C++%20CI/badge.svg)
-[![Build Status](https://travis-ci.com/mistydew/rssSearchEngine.svg?branch=master)](https://travis-ci.com/mistydew/rssSearchEngine)
+![](https://github.com/mistydew/RSSearch/workflows/C/C++%20CI/badge.svg)
 
-A mini search engine with rss.
+A RSS search engine with spell correction mechanism.
 
 ## Todo
 
-- [ ] remove json, remake conf file system
+- [ ] remove dir: data, depends, dict, lib and res
+- [ ] code refactoring: config system (remove json)
 
 ## To Build
 
 ```
-$ git clone https://github.com/mistydew/rssSearchEngine.git
-$ cd rssSearchEngine
+$ git clone https://github.com/mistydew/RSSearch.git
+$ cd RSSearch
 $ make
 $ make install # optional
 ```
@@ -46,11 +46,11 @@ $ sudo apt install redis-server
 ## Usage
 
 ```
-$ ./createlib ~/rssSearchEngine/createlib.conf
-$ ./searchengined ~/rssSearchEngine/searchengine.conf
+$ ./createlib ~/RSSearch/createlib.conf
+$ ./searchengined ~/RSSearch/searchengine.conf
 ```
 
 ## License
 
-rssSearchEngine is released under the terms of the MIT license.
+RSSearch is released under the terms of the MIT license.
 See [LICENSE](LICENSE) for more information or see https://opensource.org/licenses/MIT.
