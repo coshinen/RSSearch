@@ -24,10 +24,11 @@ These dependencies are required:
 
 Library  | Purpose       | Description
 ---------|---------------|-------------
-libboost | Utility       | Library for threading, data structures, etc.
-cppjieba | Segmentation  | Chinese word segmentation
-simhash  | Deduplication | Remove duplicate
-Redis    | Redis         | Data storage, Cache
+Boost    | Utility       | Library for threading, data structures, etc.
+CppJieba | Segmentation  | Chinese word segmentation
+Simhash  | Deduplication | Remove duplicate
+Redis    | Database      | Data storage, Cache
+TinyXML2 | XML parsing   | XML parser
 
 ## Linux Distribution Specific Instructions
 
